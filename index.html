@@ -28,6 +28,13 @@
             600: '#C96F89',
             700: '#A85770',
           },
+          hoop: {
+            300: '#FFB578',
+            400: '#FF9142',
+            500: '#F97316',
+            600: '#E8590C',
+            700: '#C2410C',
+          },
           ink: '#121212',
           wood: '#C9A177',
           woodDark: '#9C7852',
@@ -160,7 +167,7 @@
   .graffiti-title {
     display: inline-block;
     transform: rotate(-2deg);
-    text-shadow: 2px 2px 0 rgba(222,140,162,0.35);
+    text-shadow: 2px 2px 0 rgba(249,115,22,0.35);
   }
 
   .spray-underline { position: relative; display: inline-block; }
@@ -169,7 +176,7 @@
     position: absolute;
     left: -4%; right: -4%; bottom: -6px;
     height: 9px;
-    background: linear-gradient(90deg, #DE8CA2, #C9A177 60%, transparent);
+    background: linear-gradient(90deg, #F97316, #C9A177 60%, transparent);
     border-radius: 999px;
     opacity: 0.9;
     transform: rotate(-1deg);
@@ -177,26 +184,43 @@
 
   .tape {
     position: absolute;
-    background: rgba(244,201,211,0.85);
+    background: repeating-linear-gradient(45deg, rgba(255,145,66,0.9), rgba(255,145,66,0.9) 6px, rgba(20,19,15,0.9) 6px, rgba(20,19,15,0.9) 12px);
     box-shadow: 0 2px 6px rgba(0,0,0,0.35);
     height: 26px;
   }
 
   .admin-btn-spray {
-    background: linear-gradient(120deg, #DE8CA2, #C96F89 55%, #A85770);
-    box-shadow: 0 10px 24px -8px rgba(222,140,162,0.55);
+    background: linear-gradient(120deg, #FF9142, #F97316 55%, #C2410C);
+    box-shadow: 0 10px 24px -8px rgba(249,115,22,0.55);
   }
   .admin-btn-spray:hover { filter: brightness(1.08); }
 
   .stencil-input {
     background: #14130f;
-    border: 1.5px dashed rgba(244,201,211,0.35);
+    border: 1.5px dashed rgba(255,145,66,0.35);
     color: #f5f0e8;
   }
   .stencil-input::placeholder { color: rgba(245,240,232,0.35); }
-  .stencil-input:focus { border-color: #DE8CA2; border-style: solid; outline: none; }
+  .stencil-input:focus { border-color: #F97316; border-style: solid; outline: none; }
 
   .marker-label { font-family: 'Permanent Marker', cursive; letter-spacing: 0.02em; }
+
+  /* Costuras de balón de básquet — detalle decorativo sutil */
+  .ball-seam {
+    position: absolute;
+    border: 2px solid rgba(255,145,66,0.18);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .ball-seam::before, .ball-seam::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+  }
+  .ball-seam::before { border-left: 2px solid rgba(255,145,66,0.18); border-right: 2px solid rgba(255,145,66,0.18); }
+  .ball-seam::after { border-top: 2px solid rgba(255,145,66,0.18); border-bottom: 2px solid rgba(255,145,66,0.18); }
+
 
   @keyframes floatSlow {
     0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -395,34 +419,37 @@
   <!-- ---- Pantalla de login ---- -->
   <div id="admin-login" class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
     <!-- Splatters decorativos -->
-    <div class="spray-blob float-slow" style="top:8%; left:10%; width:180px; height:180px; background:radial-gradient(circle, rgba(222,140,162,0.35), transparent 70%);"></div>
-    <div class="spray-blob float-slow" style="bottom:10%; right:8%; width:220px; height:220px; background:radial-gradient(circle, rgba(201,161,119,0.3), transparent 70%); animation-delay:1.5s;"></div>
+    <div class="spray-blob float-slow" style="top:8%; left:10%; width:180px; height:180px; background:radial-gradient(circle, rgba(249,115,22,0.3), transparent 70%);"></div>
+    <div class="spray-blob float-slow" style="bottom:10%; right:8%; width:220px; height:220px; background:radial-gradient(circle, rgba(201,161,119,0.28), transparent 70%); animation-delay:1.5s;"></div>
     <div class="spray-blob" style="top:40%; right:18%; width:90px; height:90px; background:radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);"></div>
+    <div class="ball-seam float-slow" style="top:-60px; left:-60px; width:220px; height:220px;"></div>
+    <div class="ball-seam" style="bottom:-80px; right:-40px; width:260px; height:260px; opacity:0.7;"></div>
 
     <form id="admin-login-form" class="admin-card graffiti-card rounded-2xl p-8 w-full max-w-sm relative">
       <div class="tape -top-3 -left-4 w-20 rotate-[-8deg]"></div>
-      <p class="font-tag text-4xl text-blush-400 graffiti-title spray-underline mb-3">HEAVEN DIVISION</p>
+      <p class="font-tag text-4xl text-hoop-400 graffiti-title spray-underline mb-3">HEAVEN DIVISION</p>
       <p class="text-white/50 text-sm mb-6 tracking-wide">// Panel de administrador</p>
-      <label class="marker-label text-sm text-blush-300 block mb-1">Contraseña</label>
+      <label class="marker-label text-sm text-hoop-300 block mb-1">Contraseña</label>
       <input id="admin-password" type="password" required placeholder="••••••••"
         class="stencil-input w-full rounded-lg px-3 py-2 mb-2 transition-colors" />
       <p id="admin-login-error" class="hidden text-xs text-red-400 mb-3">Contraseña incorrecta.</p>
       <button type="submit" class="admin-btn-spray w-full text-white rounded-full py-3 text-sm font-bold tracking-wide hover:opacity-95 transition-all mt-2">
         ENTRAR
       </button>
-      <a href="index.html" class="block text-center text-xs text-white/40 mt-4 hover:text-blush-300 transition-colors">← Volver a la tienda</a>
+      <a href="index.html" class="block text-center text-xs text-white/40 mt-4 hover:text-hoop-300 transition-colors">← Volver a la tienda</a>
     </form>
   </div>
 
   <!-- ---- Dashboard admin ---- -->
   <div id="admin-dashboard" class="hidden max-w-5xl mx-auto px-4 sm:px-6 py-10 relative">
-    <div class="spray-blob" style="top:-40px; right:-60px; width:260px; height:260px; background:radial-gradient(circle, rgba(222,140,162,0.22), transparent 70%);"></div>
+    <div class="spray-blob" style="top:-40px; right:-60px; width:260px; height:260px; background:radial-gradient(circle, rgba(249,115,22,0.2), transparent 70%);"></div>
     <div class="spray-blob" style="bottom:0; left:-80px; width:220px; height:220px; background:radial-gradient(circle, rgba(201,161,119,0.18), transparent 70%);"></div>
+    <div class="ball-seam" style="top:10%; right:-100px; width:220px; height:220px; opacity:0.6;"></div>
 
     <div class="admin-card flex items-center justify-between mb-10">
-      <p class="font-tag text-3xl sm:text-4xl text-blush-400 graffiti-title spray-underline">PANEL ADMIN</p>
+      <p class="font-tag text-3xl sm:text-4xl text-hoop-400 graffiti-title spray-underline">PANEL ADMIN</p>
       <div class="flex items-center gap-4">
-        <a href="index.html" class="text-sm font-semibold text-white/70 hover:text-blush-300 transition-colors">Ver tienda</a>
+        <a href="index.html" class="text-sm font-semibold text-white/70 hover:text-hoop-300 transition-colors">Ver tienda</a>
         <button id="admin-logout" class="text-sm font-semibold text-red-400 hover:opacity-70">Salir</button>
       </div>
     </div>
@@ -430,7 +457,7 @@
     <!-- Configuración de la barra superior -->
     <section class="admin-card graffiti-card rounded-2xl p-6 mb-8 relative">
       <div class="tape -top-3 left-6 w-16 rotate-[-5deg]"></div>
-      <h2 class="marker-label text-lg text-blush-300 mb-4">Barra superior de anuncios</h2>
+      <h2 class="marker-label text-lg text-hoop-300 mb-4">Barra superior de anuncios</h2>
       <form id="topbar-form" class="flex flex-col sm:flex-row gap-3">
         <input id="topbar-input" type="text" required placeholder="Texto de la barra superior"
           class="stencil-input flex-1 rounded-lg px-3 py-2 transition-colors" />
@@ -443,12 +470,12 @@
     <!-- Imágenes de la tienda: logo y escaparate principal -->
     <section class="admin-card graffiti-card rounded-2xl p-6 mb-8 relative">
       <div class="tape -top-3 right-10 w-16 rotate-[6deg]"></div>
-      <h2 class="marker-label text-lg text-blush-300 mb-4">Imágenes de la tienda</h2>
+      <h2 class="marker-label text-lg text-hoop-300 mb-4">Imágenes de la tienda</h2>
       <form id="images-form" class="grid sm:grid-cols-2 gap-6">
         <div>
           <label class="text-xs font-semibold text-white/50 block mb-2 tracking-wide uppercase">Logo (barra de navegación)</label>
           <div class="flex items-center gap-3 mb-2">
-            <div class="w-14 h-14 rounded-lg border border-blush-400/20 bg-black/30 overflow-hidden flex items-center justify-center shrink-0">
+            <div class="w-14 h-14 rounded-lg border border-hoop-400/20 bg-black/30 overflow-hidden flex items-center justify-center shrink-0">
               <img id="logo-preview" src="" alt="" class="hidden w-full h-full object-contain" />
               <span id="logo-preview-empty" class="text-[10px] text-white/30 text-center px-1">Sin logo</span>
             </div>
@@ -459,7 +486,7 @@
         <div>
           <label class="text-xs font-semibold text-white/50 block mb-2 tracking-wide uppercase">Imagen del escaparate (hero)</label>
           <div class="flex items-center gap-3 mb-2">
-            <div class="w-14 h-14 rounded-lg border border-blush-400/20 bg-black/30 overflow-hidden flex items-center justify-center shrink-0">
+            <div class="w-14 h-14 rounded-lg border border-hoop-400/20 bg-black/30 overflow-hidden flex items-center justify-center shrink-0">
               <img id="hero-preview" src="" alt="" class="hidden w-full h-full object-cover" />
               <span id="hero-preview-empty" class="text-[10px] text-white/30 text-center px-1">Sin imagen</span>
             </div>
@@ -478,7 +505,7 @@
     <!-- Nueva prenda -->
     <section class="admin-card graffiti-card rounded-2xl p-6 mb-8 relative">
       <div class="tape -top-3 left-1/2 -translate-x-1/2 w-20 rotate-[3deg]"></div>
-      <h2 class="marker-label text-lg text-blush-300 mb-4">Publicar nueva prenda</h2>
+      <h2 class="marker-label text-lg text-hoop-300 mb-4">Publicar nueva prenda</h2>
       <form id="product-form" class="grid sm:grid-cols-2 gap-4">
         <div>
           <label class="text-xs font-semibold text-white/50 block mb-1 tracking-wide uppercase">Nombre</label>
@@ -517,7 +544,7 @@
     <!-- Lista de prendas -->
     <section class="admin-card graffiti-card rounded-2xl p-6 relative">
       <div class="tape -top-3 right-8 w-16 rotate-[-4deg]"></div>
-      <h2 class="marker-label text-lg text-blush-300 mb-4">Prendas publicadas</h2>
+      <h2 class="marker-label text-lg text-hoop-300 mb-4">Prendas publicadas</h2>
       <div id="admin-product-list" class="flex flex-col divide-y divide-white/10"></div>
     </section>
   </div>
@@ -1102,7 +1129,7 @@
       .map(
         (p) => `
       <div class="flex items-center gap-4 py-3">
-        <div class="w-12 h-12 rounded-lg overflow-hidden bg-black/30 shrink-0 border border-blush-400/20">
+        <div class="w-12 h-12 rounded-lg overflow-hidden bg-black/30 shrink-0 border border-hoop-400/20">
           ${
             p.imagen_url
               ? `<img src="${escapeHtml(p.imagen_url)}" class="w-full h-full object-cover" alt="${escapeHtml(p.nombre)}" />`
