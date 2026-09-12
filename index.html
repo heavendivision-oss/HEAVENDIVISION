@@ -1,4009 +1,826 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HEAVEN DIVISION — Streetwear Store</title>
+<meta name="description" content="HEAVEN DIVISION — boutique de streetwear online." />
 
+<!-- ============== FUENTES ============== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Google Tag Manager -->
+<!-- ============== TAILWIND (CDN) ============== -->
+<script src="https://cdn.tailwindcss.com"></script>
 <script>
-    (function(w,d,s,l,i){
-        w[l]=w[l]||[];
-        w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-        var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),
-        dl=l!='dataLayer'?'&l='+l:'';
-        j.async=true;
-        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-        f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MH8F8QT3');
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          blush: {
+            50:  '#FCF3F5',
+            100: '#FBEAEF',
+            200: '#F4C9D3',
+            300: '#EDB2C0',
+            400: '#E8A7B8',
+            500: '#DE8CA2',
+            600: '#C96F89',
+            700: '#A85770',
+          },
+          ink: '#121212',
+          wood: '#C9A177',
+          woodDark: '#9C7852',
+        },
+        fontFamily: {
+          display: ['Anton', 'sans-serif'],
+          body: ['Inter', 'sans-serif'],
+        },
+      },
+    },
+  };
 </script>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DM7QPR24LC"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DM7QPR24LC');
-</script>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>HEAVEN DIVISIÓN</title>
-
-<style>
-
-    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800;900&display=swap');
-
-    :root {
-        --rosa-claro: #fbe3ef;
-        --rosa: #f2a9cf;
-        --rosa-2: #e874ae;
-        --rosa-fuerte: #d6337e;
-        --rosa-oscura: #9c1f5c;
-
-        --negro: #141414;
-        --negro-suave: #262626;
-
-        --blanco: #ffffff;
-        --gris-claro: #f6f6f7;
-        --gris: #8d8d93;
-        --borde: #ececee;
-
-        --sombra: 0 10px 30px rgba(20,20,20,.08);
-        --sombra-fuerte: 0 22px 55px rgba(20,20,20,.16);
-
-        --radio: 4px;
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Inter', Arial, Helvetica, sans-serif;
-    }
-
-    html {
-        scroll-behavior: smooth;
-        -webkit-text-size-adjust: 100%;
-    }
-
-    body {
-        background: var(--blanco);
-        color: var(--negro);
-        line-height: 1.5;
-        min-height: 100vh;
-    }
-
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-        font-family: inherit;
-    }
-
-    .marca {
-        font-family: 'Anton', 'Inter', sans-serif;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-
-    /* =========================
-       PATRÓN CAMUFLADO ROSA (reutilizable)
-    ========================= */
-
-    .camo-fondo {
-        position: relative;
-        background-color: var(--rosa-claro);
-        background-image:
-            radial-gradient(ellipse 140px 90px at 10% 20%, var(--rosa-2) 0%, transparent 60%),
-            radial-gradient(ellipse 180px 120px at 80% 15%, var(--rosa) 0%, transparent 60%),
-            radial-gradient(ellipse 130px 100px at 55% 70%, var(--rosa-oscura) 0%, transparent 55%),
-            radial-gradient(ellipse 160px 110px at 25% 85%, var(--rosa-2) 0%, transparent 60%),
-            radial-gradient(ellipse 120px 90px at 95% 80%, var(--rosa) 0%, transparent 55%),
-            radial-gradient(ellipse 150px 100px at 40% 40%, var(--blanco) 0%, transparent 65%);
-        background-blend-mode: multiply;
-    }
-
-    /* =========================
-       BARRA SUPERIOR
-    ========================= */
-
-    .top-bar {
-        background: var(--negro);
-        color: var(--blanco);
-        display: flex;
-        justify-content: center;
-        gap: 1.8rem;
-        flex-wrap: wrap;
-        padding: .6rem 1rem;
-        font-size: .72rem;
-        font-weight: 700;
-        letter-spacing: .6px;
-        text-transform: uppercase;
-    }
-
-    .top-bar span {
-        transition: color .25s ease;
-    }
-
-    .top-bar span:hover {
-        color: var(--rosa);
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    header {
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-        padding: 2.6rem 1rem 3.2rem;
-        border-bottom: 3px solid var(--negro);
-        animation: headerEntrada .7s ease both;
-    }
-
-    header.camo-fondo {
-        background-color: var(--rosa-claro);
-    }
-
-    .logo-tienda {
-        position: relative;
-        z-index: 2;
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 3px solid var(--negro);
-        background: var(--blanco);
-        box-shadow: var(--sombra-fuerte);
-        transition: transform .3s ease;
-    }
-
-    .logo-tienda:hover {
-        transform: scale(1.04) rotate(-1deg);
-    }
-
-    header h1 {
-        position: relative;
-        z-index: 2;
-        margin-top: 1.1rem;
-        font-family: 'Anton', sans-serif;
-        font-size: clamp(2.1rem, 7vw, 3.4rem);
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--negro);
-        -webkit-text-stroke: .5px var(--negro);
-    }
-
-    header p {
-        position: relative;
-        z-index: 2;
-        color: var(--rosa-oscura);
-        margin-top: .35rem;
-        font-size: .82rem;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        font-weight: 800;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-        max-width: 1200px;
-        margin: 2.2rem auto 0;
-        padding: 0 1rem;
-        animation: subir .7s .1s ease both;
-    }
-
-    .hero-box {
-        position: relative;
-        overflow: hidden;
-        display: grid;
-        grid-template-columns: 1.25fr .75fr;
-        gap: 1.5rem;
-        align-items: center;
-        background: var(--gris-claro);
-        border: 1px solid var(--borde);
-        border-radius: 10px;
-        padding: 2rem;
-        box-shadow: var(--sombra);
-    }
-
-    .hero-texto h2 {
-        font-family: 'Anton', sans-serif;
-        text-transform: uppercase;
-        font-size: clamp(1.6rem, 4.5vw, 2.5rem);
-        line-height: 1.1;
-        margin-bottom: .9rem;
-        color: var(--negro);
-    }
-
-    .hero-texto h2 span {
-        color: var(--rosa-fuerte);
-    }
-
-    .hero-texto p {
-        color: #4a4a4f;
-        max-width: 650px;
-        margin-bottom: 1.2rem;
-        font-size: .96rem;
-    }
-
-    .hero-badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: .6rem;
-    }
-
-    .hero-badge {
-        background: var(--blanco);
-        border: 1.5px solid var(--negro);
-        color: var(--negro);
-        padding: .55rem .85rem;
-        border-radius: 999px;
-        font-size: .74rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: .3px;
-        transition: transform .25s ease, background .25s ease, color .25s ease;
-    }
-
-    .hero-badge:hover {
-        transform: translateY(-3px);
-        background: var(--negro);
-        color: var(--blanco);
-    }
-
-    .hero-card {
-        position: relative;
-        z-index: 2;
-        background: var(--negro);
-        border-radius: 10px;
-        padding: 1.5rem;
-        box-shadow: var(--sombra);
-    }
-
-    .hero-card h3 {
-        color: var(--blanco);
-        margin-bottom: .9rem;
-        font-size: 1.05rem;
-        text-transform: uppercase;
-        letter-spacing: .4px;
-    }
-
-    .hero-card ul {
-        list-style: none;
-        display: grid;
-        gap: .6rem;
-        color: #d8d8dc;
-        font-size: .88rem;
-    }
-
-    .hero-card li {
-        transition: transform .2s ease, color .2s ease;
-    }
-
-    .hero-card li:hover {
-        transform: translateX(4px);
-        color: var(--rosa);
-    }
-
-    /* =========================
-       BUSCADOR
-    ========================= */
-
-    .contenedor-buscador {
-        position: relative;
-        max-width: 620px;
-        margin: 2.2rem auto 0;
-        padding: 0 1rem;
-    }
-
-    .contenedor-buscador::before {
-        content: "🔍";
-        position: absolute;
-        left: 1.85rem;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 1rem;
-        opacity: .7;
-        pointer-events: none;
-    }
-
-    .input-buscador {
-        width: 100%;
-        padding: 1rem 1.15rem 1rem 2.9rem;
-        border-radius: 999px;
-        border: 2px solid var(--negro);
-        outline: none;
-        background: var(--blanco);
-        color: var(--negro);
-        font-size: .96rem;
-        font-weight: 600;
-        transition: border-color .25s ease, box-shadow .25s ease;
-    }
-
-    .input-buscador::placeholder {
-        color: var(--gris);
-        font-weight: 500;
-    }
-
-    .input-buscador:focus {
-        border-color: var(--rosa-fuerte);
-        box-shadow: 0 0 0 4px rgba(214,51,126,.15);
-    }
-
-    /* =========================
-       TITULO
-    ========================= */
-
-    .titulo-seccion {
-        max-width: 1200px;
-        margin: 3rem auto 0;
-        padding: 0 1rem;
-        text-align: center;
-    }
-
-    .titulo-seccion h2 {
-        font-family: 'Anton', sans-serif;
-        text-transform: uppercase;
-        font-size: 2rem;
-        letter-spacing: 1px;
-        color: var(--negro);
-    }
-
-    .titulo-seccion h2::after {
-        content: "";
-        display: block;
-        width: 55px;
-        height: 4px;
-        background: var(--rosa-fuerte);
-        margin: .7rem auto;
-        border-radius: 10px;
-    }
-
-    .titulo-seccion p {
-        color: var(--gris);
-        font-size: .88rem;
-    }
-
-    /* =========================
-       CATALOGO
-    ========================= */
-
-    .catalogo {
-        max-width: 1200px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1.4rem;
-    }
-
-    .tarjeta-producto {
-        position: relative;
-        min-height: 470px;
-        overflow: hidden;
-        border-radius: 10px;
-        background: var(--blanco);
-        border: 1px solid var(--borde);
-        box-shadow: var(--sombra);
-        cursor: pointer;
-
-        opacity: 0;
-        transform: translateY(20px);
-        transition:
-            opacity .6s ease,
-            transform .4s ease,
-            box-shadow .3s ease,
-            border-color .3s ease;
-    }
-
-    .tarjeta-producto.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .tarjeta-producto:hover {
-        transform: translateY(-6px);
-        box-shadow: var(--sombra-fuerte);
-        border-color: var(--rosa);
-    }
-
-    .badge-producto {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        z-index: 7;
-        padding: .4rem .65rem;
-        border-radius: 4px;
-        background: var(--negro);
-        color: var(--blanco);
-        font-size: .64rem;
-        font-weight: 800;
-        letter-spacing: .6px;
-        text-transform: uppercase;
-    }
-
-    .imagen-contenedor {
-        position: relative;
-        width: 100%;
-        height: 300px;
-        overflow: hidden;
-        background: var(--rosa-claro);
-    }
-
-    .imagen-contenedor img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform .5s ease;
-    }
-
-    .tarjeta-producto:hover .imagen-contenedor img {
-        transform: scale(1.05);
-    }
-
-    .overlay-galeria {
-        display: none;
-    }
-
-    .contenido-galeria {
-        position: relative;
-        padding: 1rem 1.1rem 1.2rem;
-    }
-
-    .contenido-galeria h3 {
-        color: var(--negro);
-        font-size: .98rem;
-        font-weight: 800;
-        line-height: 1.25;
-        margin-bottom: .3rem;
-    }
-
-    .precio {
-        color: var(--rosa-fuerte);
-        font-size: 1.15rem;
-        font-weight: 900;
-        margin-bottom: .35rem;
-    }
-
-    .tallas-contenedor {
-        color: var(--gris);
-        font-size: .76rem;
-        margin-bottom: .5rem;
-    }
-
-    .tallas-contenedor span {
-        color: var(--negro);
-        font-weight: 800;
-    }
-
-    .detalle-extra {
-        color: var(--gris);
-        font-size: .78rem;
-        margin-bottom: .85rem;
-    }
-
-    .acciones-producto {
-        display: flex;
-        gap: .55rem;
-    }
-
-    .btn-instagram,
-    .btn-whatsapp {
-        position: relative;
-        overflow: hidden;
-        border: 1.5px solid var(--negro);
-        cursor: pointer;
-        padding: .7rem .8rem;
-        border-radius: 4px;
-        font-weight: 800;
-        font-size: .72rem;
-        text-transform: uppercase;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: .35rem;
-        flex: 1;
-        transition: transform .2s ease, background .2s ease, color .2s ease;
-    }
-
-    .btn-instagram {
-        background: var(--blanco);
-        color: var(--negro);
-    }
-
-    .btn-instagram:hover {
-        background: var(--negro);
-        color: var(--blanco);
-        transform: translateY(-2px);
-    }
-
-    .btn-whatsapp {
-        background: var(--negro);
-        color: var(--blanco);
-        border-color: var(--negro);
-    }
-
-    .btn-whatsapp:hover {
-        background: var(--rosa-fuerte);
-        border-color: var(--rosa-fuerte);
-        transform: translateY(-2px);
-    }
-
-    .sin-resultados {
-        display: none;
-        text-align: center;
-        color: var(--gris);
-        padding: 1rem;
-    }
-
-    /* =========================
-       BENEFICIOS / TESTIMONIOS
-    ========================= */
-
-    .beneficios,
-    .testimonios {
-        max-width: 1200px;
-        margin: 3.2rem auto;
-        padding: 0 1rem;
-    }
-
-    .beneficios h2,
-    .testimonios h2 {
-        text-align: center;
-        font-family: 'Anton', sans-serif;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--negro);
-        font-size: 1.7rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .grid-beneficios,
-    .grid-testimonios {
-        display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-        gap: 1rem;
-    }
-
-    .beneficio-card,
-    .testimonio {
-        background: var(--gris-claro);
-        border: 1px solid var(--borde);
-        border-radius: 8px;
-        padding: 1.3rem;
-        transition: transform .25s ease, border-color .25s ease;
-    }
-
-    .beneficio-card:hover,
-    .testimonio:hover {
-        transform: translateY(-4px);
-        border-color: var(--rosa);
-    }
-
-    .beneficio-card h3 {
-        color: var(--rosa-fuerte);
-        font-size: .95rem;
-        text-transform: uppercase;
-        letter-spacing: .3px;
-        margin-bottom: .45rem;
-    }
-
-    .beneficio-card p,
-    .testimonio p {
-        color: #55555a;
-        font-size: .86rem;
-    }
-
-    .testimonio {
-        border-left: 3px solid var(--negro);
-    }
-
-    .testimonio strong {
-        display: block;
-        margin-top: .6rem;
-        color: var(--negro);
-        font-size: .82rem;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-        margin-top: 3rem;
-        padding: 2.4rem 1rem 1.2rem;
-        background: var(--negro);
-        color: var(--blanco);
-    }
-
-    .footer-contenido {
-        max-width: 1200px;
-        margin: auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
-        gap: 1.5rem;
-    }
-
-    .footer-col h3 {
-        font-family: 'Anton', sans-serif;
-        text-transform: uppercase;
-        letter-spacing: .5px;
-        color: var(--rosa);
-        font-size: 1rem;
-        margin-bottom: .6rem;
-    }
-
-    .footer-col p,
-    .footer-col a {
-        color: #c9c9cd;
-        font-size: .82rem;
-        margin-bottom: .4rem;
-        display: block;
-    }
-
-    .footer-col a {
-        transition: color .2s ease, transform .2s ease;
-    }
-
-    .footer-col a:hover {
-        color: var(--rosa);
-        transform: translateX(3px);
-    }
-
-    .footer-copy {
-        text-align: center;
-        color: #83838a;
-        margin-top: 1.8rem;
-        padding-top: 1rem;
-        border-top: 1px solid rgba(255,255,255,.1);
-        font-size: .76rem;
-    }
-
-    /* =========================
-       POPUP
-    ========================= */
-
-    .popup-promocion {
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-        background: rgba(20,20,20,.82);
-        backdrop-filter: blur(6px);
-    }
-
-    .popup-promocion.oculto {
-        display: none;
-    }
-
-    .popup-contenido {
-        position: relative;
-        width: min(92vw,520px);
-        animation: popupEntrada .3s ease both;
-    }
-
-    .popup-contenido img {
-        display: block;
-        width: 100%;
-        max-height: 90vh;
-        object-fit: contain;
-        border-radius: 8px;
-        box-shadow: var(--sombra-fuerte);
-    }
-
-    .popup-contenido--chico {
-        width: min(72vw,300px);
-    }
-
-    .popup-contenido--chico img {
-        max-height: 65vh;
-    }
-
-    .cerrar-popup,
-    .cerrar-modal {
-        cursor: pointer;
-        transition: transform .25s ease;
-    }
-
-    .cerrar-popup:hover,
-    .cerrar-modal:hover {
-        transform: rotate(90deg);
-    }
-
-    .cerrar-popup {
-        position: absolute;
-        top: -13px;
-        right: -13px;
-        width: 38px;
-        height: 38px;
-        border: 2px solid var(--negro);
-        border-radius: 50%;
-        background: var(--blanco);
-        color: var(--negro);
-        font-size: 1.4rem;
-        font-weight: 900;
-        z-index: 2;
-    }
-
-    /* =========================
-       MODAL PEDIDO
-    ========================= */
-
-    .modal-pedido {
-        position: fixed;
-        inset: 0;
-        z-index: 10000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-        background: rgba(20,20,20,.78);
-        backdrop-filter: blur(6px);
-        opacity: 1;
-        visibility: visible;
-        transition: opacity .25s ease, visibility .25s ease;
-    }
-
-    .modal-pedido.oculto {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-    }
-
-    .modal-caja {
-        position: relative;
-        width: min(94vw,470px);
-        max-height: 92vh;
-        overflow-y: auto;
-        background: var(--blanco);
-        border-top: 4px solid var(--rosa-fuerte);
-        border-radius: 10px;
-        padding: 1.4rem;
-        box-shadow: var(--sombra-fuerte);
-        animation: modalEntrada .3s ease;
-    }
-
-    .modal-caja h2 {
-        color: var(--negro);
-        margin-bottom: .25rem;
-        padding-right: 35px;
-        font-family: 'Anton', sans-serif;
-        text-transform: uppercase;
-        letter-spacing: .5px;
-    }
-
-    .modal-subtitulo {
-        color: var(--gris);
-        font-size: .86rem;
-        margin-bottom: 1rem;
-    }
-
-    .cerrar-modal {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        width: 34px;
-        height: 34px;
-        border: 1.5px solid var(--negro);
-        border-radius: 50%;
-        background: var(--blanco);
-        color: var(--negro);
-        font-size: 1.2rem;
-        z-index: 5;
-    }
-
-    .producto-resumen {
-        background: var(--gris-claro);
-        border-left: 3px solid var(--rosa-fuerte);
-        border-radius: 6px;
-        padding: .85rem;
-        margin-bottom: 1rem;
-    }
-
-    .producto-resumen strong {
-        display: block;
-        color: var(--negro);
-        margin-bottom: .2rem;
-    }
-
-    .producto-resumen span {
-        display: block;
-        color: var(--gris);
-        font-size: .83rem;
-    }
-
-    .campo-formulario {
-        margin-bottom: .9rem;
-    }
-
-    .campo-formulario label {
-        display: block;
-        color: var(--negro);
-        font-weight: 700;
-        font-size: .84rem;
-        margin-bottom: .35rem;
-    }
-
-    .campo-formulario input,
-    .campo-formulario select,
-    .campo-formulario textarea {
-        width: 100%;
-        border: 1.5px solid var(--borde);
-        border-radius: 6px;
-        padding: .8rem;
-        background: var(--blanco);
-        color: var(--negro);
-        outline: none;
-        font-size: .92rem;
-        transition: border-color .2s ease, box-shadow .2s ease;
-    }
-
-    .campo-formulario input:focus,
-    .campo-formulario select:focus,
-    .campo-formulario textarea:focus {
-        border-color: var(--rosa-fuerte);
-        box-shadow: 0 0 0 3px rgba(214,51,126,.14);
-    }
-
-    .campo-formulario textarea {
-        resize: vertical;
-        min-height: 85px;
-    }
-
-    .campo-estampado {
-        display: flex;
-        align-items: flex-start;
-        gap: .6rem;
-        background: var(--gris-claro);
-        border: 1.5px solid var(--borde);
-        border-radius: 6px;
-        padding: .8rem;
-        cursor: pointer;
-        transition: border-color .2s ease;
-    }
-
-    .campo-estampado:hover {
-        border-color: var(--rosa);
-    }
-
-    .campo-estampado input[type="checkbox"] {
-        margin-top: .15rem;
-        width: 18px;
-        height: 18px;
-        accent-color: var(--rosa-fuerte);
-        flex-shrink: 0;
-        cursor: pointer;
-    }
-
-    .campo-estampado-texto strong {
-        display: block;
-        color: var(--negro);
-        font-size: .88rem;
-    }
-
-    .campo-estampado-texto span {
-        display: block;
-        color: var(--rosa-fuerte);
-        font-size: .8rem;
-        font-weight: 700;
-        margin-top: .15rem;
-    }
-
-    .campo-estampado-datos {
-        margin-top: .7rem;
-        display: grid;
-        gap: .7rem;
-    }
-
-    .boton-generar {
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        border: none;
-        border-radius: 6px;
-        padding: .95rem;
-        font-weight: 900;
-        font-size: .86rem;
-        text-transform: uppercase;
-        letter-spacing: .4px;
-        cursor: pointer;
-        transition: transform .2s ease, filter .2s ease;
-    }
-
-    .boton-generar:hover {
-        transform: translateY(-2px);
-        filter: brightness(1.05);
-    }
-
-    .boton-whatsapp-modal {
-        background: #25D366;
-        color: #06210f;
-    }
-
-    .boton-instagram-modal {
-        background: linear-gradient(135deg, #833AB4, #E1306C, #F77737);
-        color: var(--blanco);
-    }
-
-    .aviso-instagram {
-        margin-top: .7rem;
-        padding: .7rem;
-        border-radius: 6px;
-        background: var(--gris-claro);
-        color: var(--gris);
-        font-size: .76rem;
-        text-align: center;
-    }
-
-    /* =========================
-       MODAL DETALLE PRODUCTO
-    ========================= */
-
-    .modal-detalle-producto {
-        position: fixed;
-        inset: 0;
-        z-index: 9998;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-        background: rgba(20,20,20,.82);
-        backdrop-filter: blur(6px);
-        opacity: 1;
-        visibility: visible;
-        transition: opacity .25s ease, visibility .25s ease;
-    }
-
-    .modal-detalle-producto.oculto {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-    }
-
-    .detalle-caja {
-        position: relative;
-        width: min(94vw,480px);
-        max-height: 92vh;
-        overflow-y: auto;
-        background: var(--blanco);
-        border-top: 4px solid var(--rosa-fuerte);
-        border-radius: 10px;
-        box-shadow: var(--sombra-fuerte);
-        animation: modalEntrada .3s ease;
-    }
-
-    .detalle-imagen-contenedor {
-        position: relative;
-        width: 100%;
-        max-height: 340px;
-        overflow: hidden;
-        border-radius: 10px 10px 0 0;
-        background: var(--rosa-claro);
-    }
-
-    .detalle-imagen-contenedor img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        max-height: 340px;
-        object-fit: cover;
-    }
-
-    .detalle-info {
-        padding: 1.4rem;
-    }
-
-    .detalle-info h2 {
-        color: var(--negro);
-        margin-bottom: .4rem;
-        padding-right: 35px;
-        font-family: 'Anton', sans-serif;
-        text-transform: uppercase;
-    }
-
-    /* =========================
-       MENSAJE COPIADO
-    ========================= */
-
-    .mensaje-copiado {
-        position: fixed;
-        left: 50%;
-        bottom: 22px;
-        transform: translateX(-50%) translateY(25px);
-        background: var(--negro);
-        color: var(--blanco);
-        padding: .8rem 1.1rem;
-        border-radius: 6px;
-        z-index: 11000;
-        opacity: 0;
-        pointer-events: none;
-        transition: all .3s ease;
-        font-size: .8rem;
-        box-shadow: var(--sombra-fuerte);
-        text-align: center;
-    }
-
-    .mensaje-copiado.mostrar {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-
-    /* =========================
-       ANIMACIONES
-    ========================= */
-
-    @keyframes headerEntrada {
-        from { opacity: 0; transform: translateY(-16px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes subir {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes popupEntrada {
-        from { opacity: 0; transform: scale(.92) translateY(15px); }
-        to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    @keyframes modalEntrada {
-        from { opacity: 0; transform: scale(.95) translateY(15px); }
-        to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    /* =========================
-       CELULAR
-    ========================= */
-
-    @media (max-width: 900px) {
-        .hero-box { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 768px) {
-        .top-bar { gap: .65rem; font-size: .66rem; }
-        header { padding: 2.1rem 1rem 2.5rem; }
-        .logo-tienda { width: 100px; height: 100px; }
-        .hero-box { padding: 1.3rem; }
-        .hero-card { padding: 1.1rem; }
-        .catalogo { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
-        .tarjeta-producto { min-height: 380px; }
-        .imagen-contenedor { height: 220px; }
-        .contenido-galeria { padding: .8rem .85rem 1rem; }
-        .acciones-producto { flex-direction: column; gap: .4rem; }
-        .tarjeta-producto:active { transform: scale(.98); }
-    }
-
-    @media (max-width: 420px) {
-        .catalogo { grid-template-columns: 1fr; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-            animation-duration: .01ms !important;
-            animation-iteration-count: 1 !important;
-            scroll-behavior: auto !important;
-            transition-duration: .01ms !important;
-        }
-    }
-
-    /* =========================
-       PANEL ADMINISTRADOR
-    ========================= */
-    #admin-boton {
-        position: fixed;
-        right: 18px;
-        bottom: 18px;
-        z-index: 9000;
-        border: 2px solid var(--blanco);
-        background: var(--negro);
-        color: var(--blanco);
-        padding: 11px 16px;
-        border-radius: 999px;
-        font-weight: 800;
-        text-transform: uppercase;
-        font-size: .78rem;
-        box-shadow: var(--sombra-fuerte);
-        cursor: pointer;
-        display: none;
-    }
-
-    #admin-boton:hover {
-        transform: translateY(-2px);
-        background: var(--rosa-fuerte);
-    }
-
-    .admin-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 10000;
-        background: rgba(20,20,20,.8);
-        backdrop-filter: blur(8px);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 18px;
-    }
-
-    .admin-overlay.visible {
-        display: flex;
-    }
-
-    .admin-caja {
-        width: min(920px, 100%);
-        max-height: 92vh;
-        overflow: auto;
-        background: var(--negro);
-        border: 1px solid #2b2b2b;
-        border-top: 4px solid var(--rosa-fuerte);
-        border-radius: 12px;
-        box-shadow: var(--sombra-fuerte);
-        padding: 22px;
-        position: relative;
-    }
-
-    .admin-cerrar {
-        position: absolute;
-        right: 14px;
-        top: 12px;
-        width: 38px;
-        height: 38px;
-        border: 0;
-        border-radius: 50%;
-        background: #29292f;
-        color: white;
-        font-size: 25px;
-        cursor: pointer;
-    }
-
-    .admin-titulo {
-        font-family: 'Anton', sans-serif;
-        text-transform: uppercase;
-        letter-spacing: .5px;
-        color: var(--rosa);
-        margin-bottom: 5px;
-    }
-
-    .admin-subtitulo {
-        color: #a7a7ad;
-        margin-bottom: 20px;
-    }
-
-    .admin-form-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0,1fr));
-        gap: 12px;
-    }
-
-    .admin-campo {
-        display: grid;
-        gap: 6px;
-    }
-
-    .admin-campo.full {
-        grid-column: 1 / -1;
-    }
-
-    .admin-campo label {
-        color: #ddd;
-        font-size: 13px;
-        font-weight: 700;
-    }
-
-    .admin-campo input,
-    .admin-campo textarea,
-    .admin-campo select {
-        width: 100%;
-        border: 1px solid #34343a;
-        background: #1e1e22;
-        color: white;
-        border-radius: 6px;
-        padding: 11px 12px;
-        outline: none;
-    }
-
-    .admin-campo textarea {
-        min-height: 90px;
-        resize: vertical;
-    }
-
-    .admin-campo input:focus,
-    .admin-campo textarea:focus,
-    .admin-campo select:focus {
-        border-color: var(--rosa-fuerte);
-    }
-
-    .admin-acciones {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 9px;
-        margin-top: 16px;
-    }
-
-    .admin-btn {
-        border: 0;
-        border-radius: 6px;
-        padding: 11px 15px;
-        cursor: pointer;
-        font-weight: 800;
-        text-transform: uppercase;
-        font-size: .8rem;
-    }
-
-    .admin-btn.principal {
-        background: var(--rosa-fuerte);
-        color: white;
-    }
-
-    .admin-btn.secundario {
-        background: #29292f;
-        color: white;
-    }
-
-    .admin-btn.peligro {
-        background: #b23054;
-        color: white;
-    }
-
-    .admin-estado {
-        min-height: 20px;
-        margin-top: 10px;
-        color: #d7d7d7;
-        font-size: 13px;
-    }
-
-    .admin-lista {
-        display: grid;
-        gap: 10px;
-        margin-top: 24px;
-    }
-
-    .admin-item {
-        display: grid;
-        grid-template-columns: 72px 1fr auto;
-        gap: 12px;
-        align-items: center;
-        padding: 10px;
-        background: #1e1e22;
-        border: 1px solid #2f2f35;
-        border-radius: 8px;
-    }
-
-    .admin-item img {
-        width: 72px;
-        height: 72px;
-        object-fit: cover;
-        border-radius: 6px;
-        background: #2a2a2a;
-    }
-
-    .admin-item h4 {
-        color: white;
-        margin-bottom: 3px;
-    }
-
-    .admin-item small {
-        color: #aaa;
-    }
-
-    .admin-item-acciones {
-        display: flex;
-        gap: 7px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-    }
-
-    .admin-item-acciones button {
-        border: 0;
-        border-radius: 6px;
-        padding: 8px 10px;
-        cursor: pointer;
-        color: white;
-        background: #33333a;
-        font-weight: 700;
-    }
-
-    .admin-login-caja {
-        width: min(430px,100%);
-    }
-
-    .admin-login-caja .admin-form-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .admin-login-correo {
-        padding: 10px 12px;
-        border-radius: 6px;
-        background: #1e1e22;
-        color: var(--rosa);
-        word-break: break-word;
-    }
-
-    .admin-vista {
-        display: none;
-    }
-
-    .admin-vista.visible {
-        display: block;
-    }
-
-    @media (max-width: 650px) {
-        .admin-form-grid { grid-template-columns: 1fr; }
-        .admin-campo.full { grid-column: auto; }
-        .admin-item { grid-template-columns: 60px 1fr; }
-        .admin-item img { width: 60px; height: 60px; }
-        .admin-item-acciones { grid-column: 1 / -1; justify-content: flex-start; }
-    }
-
-</style>
-
-
-<!-- SUPABASE -->
+<!-- ============== SUPABASE (CDN) ============== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<style>
+  html, body { font-family: 'Inter', sans-serif; background: #fff; }
+  .font-display { font-family: 'Anton', sans-serif; letter-spacing: 0.01em; }
+
+  /* ---- Scrollbar limpio en el carrito ---- */
+  #cart-items::-webkit-scrollbar { width: 6px; }
+  #cart-items::-webkit-scrollbar-thumb { background: #F4C9D3; border-radius: 4px; }
+
+  /* ---- Transiciones del carrito lateral ---- */
+  #cart-drawer { transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1); }
+  #cart-overlay { transition: opacity 300ms ease; }
+
+  /* ---- Entrada orquestada del hero (una sola vez al cargar) ---- */
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-rise { animation: riseIn 700ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .hero-rise-1 { animation-delay: 60ms; }
+  .hero-rise-2 { animation-delay: 160ms; }
+  .hero-rise-3 { animation-delay: 260ms; }
+
+  @keyframes shelfFade {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .shelf-fade { animation: shelfFade 800ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-rise, .shelf-fade, #cart-drawer, #cart-overlay { animation: none !important; transition: none !important; }
+  }
+
+  /* ---- Tarjetas de producto ---- */
+  .product-card { transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease; }
+  .product-card:hover { transform: translateY(-4px); border-color: #121212; box-shadow: 0 14px 28px -14px rgba(0,0,0,0.25); }
+  .product-card img { transition: transform 500ms ease; }
+  .product-card:hover img { transform: scale(1.05); }
+
+  /* Focus visible accesible */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 2px solid #121212; outline-offset: 2px;
+  }
+</style>
 </head>
 
-<body>
+<body class="text-ink">
 
-<!-- Google Tag Manager -->
-<noscript>
-    <iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-MH8F8QT3"
-        height="0"
-        width="0"
-        style="display:none;visibility:hidden">
-    </iframe>
-</noscript>
+<!-- ======================================================= -->
+<!-- VISTA: TIENDA (CLIENTE)                                  -->
+<!-- ======================================================= -->
+<div id="store-app">
 
+  <!-- ---- Top bar de anuncios ---- -->
+  <div class="bg-blush-200 text-ink text-center text-xs sm:text-sm font-semibold py-2 px-4 tracking-wide">
+    <span id="top-bar-text">Envíos gratis en pedidos superiores a $999 · HEAVEN DIVISION</span>
+  </div>
 
-<!-- BARRA SUPERIOR -->
+  <!-- ---- Navegación ---- -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-ink/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16 gap-4">
+        <a href="index.html" id="nav-logo-link" class="flex items-center shrink-0">
+          <img id="nav-logo-img" src="" alt="HEAVEN DIVISION" class="hidden h-9 w-auto object-contain" />
+          <span id="nav-logo-text" class="font-display text-xl sm:text-2xl tracking-wide">
+            HEAVEN <span class="text-blush-600">DIVISION</span>
+          </span>
+        </a>
 
-<div class="top-bar" id="top-bar-lista">
-    <span>🖤 HEAVEN DIVISIÓN</span>
-    <span>🔥 Piezas exclusivas</span>
-    <span>📩 Pedidos por WhatsApp e Instagram</span>
-    <span>🎯 Streetwear auténtico</span>
-</div>
+        <nav class="hidden md:flex items-center gap-7 text-sm font-semibold" id="category-nav">
+          <button data-categoria="" class="nav-link hover:text-blush-600 transition-colors">NEW ARRIVALS</button>
+          <button data-categoria="COLLECTIONS" class="nav-link hover:text-blush-600 transition-colors">COLLECTIONS</button>
+          <button data-categoria="WOMEN" class="nav-link hover:text-blush-600 transition-colors">WOMEN</button>
+          <button data-categoria="MEN" class="nav-link hover:text-blush-600 transition-colors">MEN</button>
+          <button data-categoria="ACCESSORIES" class="nav-link hover:text-blush-600 transition-colors">ACCESSORIES</button>
+        </nav>
 
-
-<!-- HEADER -->
-
-<header class="camo-fondo">
-
-    <img
-        id="logo-tienda-img"
-        src="https://placehold.co/300x300/f4c6dd/1a1a1a?text=TU+LOGO"
-        alt="Logo de HEAVEN DIVISIÓN (coloca aquí tu logo)"
-        class="logo-tienda"
-    >
-
-    <h1 id="header-titulo">HEAVEN DIVISIÓN</h1>
-
-    <p id="header-subtitulo">Streetwear Camo Collection</p>
-
-</header>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="hero-box">
-
-        <div class="hero-texto">
-
-            <h2 id="hero-titulo">
-                Actitud, camuflaje y <span>estilo urbano</span>
-            </h2>
-
-            <p id="hero-texto">
-                Prendas streetwear con diseño exclusivo,
-                camuflado rosa y una identidad que no
-                pasa desapercibida.
-            </p>
-
-            <div class="hero-badges" id="hero-badges-lista">
-
-                <span class="hero-badge">
-                    🖤 Streetwear auténtico
-                </span>
-
-                <span class="hero-badge">
-                    🎯 Piezas exclusivas
-                </span>
-
-                <span class="hero-badge">
-                    🔥 Edición limitada
-                </span>
-
-                <span class="hero-badge">
-                    📱 Pedidos por WhatsApp
-                </span>
-
-            </div>
-
+        <div class="flex items-center gap-4 shrink-0">
+          <button id="search-toggle" aria-label="Buscar" class="hover:text-blush-600 transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          </button>
+          <button id="cart-open" aria-label="Carrito" class="relative hover:text-blush-600 transition-colors">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+            <span id="cart-count" class="hidden absolute -top-2 -right-2 bg-ink text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+          </button>
         </div>
+      </div>
 
-        <div class="hero-card">
-
-            <h3 id="hero-card-titulo">¿Por qué elegir HEAVEN DIVISIÓN?</h3>
-
-            <ul id="hero-card-lista">
-                <li>✔ Atención rápida y directa</li>
-                <li>✔ Diseños que destacan</li>
-                <li>✔ Calidad premium</li>
-                <li>✔ Piezas exclusivas y limitadas</li>
-            </ul>
-
+      <!-- Barra de búsqueda desplegable -->
+      <div id="search-bar-wrap" class="hidden pb-3">
+        <div class="relative max-w-md">
+          <input id="search-input" type="text" placeholder="Buscar prendas por nombre o descripción..."
+            class="w-full border border-ink/20 rounded-full px-4 py-2 text-sm focus:border-blush-600 transition-colors" />
         </div>
-
+      </div>
     </div>
-
-</section>
-
-
-<!-- BUSCADOR -->
-
-<div class="contenedor-buscador">
-
-    <input
-        type="text"
-        id="buscador"
-        class="input-buscador"
-        placeholder="Busca por nombre o categoría..."
-        aria-label="Buscar productos"
-    >
-
-</div>
-
-
-<!-- TITULO -->
-
-<section class="titulo-seccion">
-
-    <h2 id="catalogo-titulo">Catálogo</h2>
-
-    <p id="catalogo-subtitulo">
-        Todas nuestras piezas disponibles.
-        Busca por nombre o categoría.
-    </p>
-
-</section>
-
-
-
-
-<!-- ACCESO ADMINISTRADOR -->
-<button id="admin-boton" type="button">⚙️ Admin</button>
-
-<div id="admin-login" class="admin-overlay" aria-hidden="true">
-    <div class="admin-caja admin-login-caja">
-        <button class="admin-cerrar" type="button" id="admin-login-cerrar">×</button>
-        <h2 class="admin-titulo">🔐 Acceso administrador</h2>
-        <p class="admin-subtitulo">Solo la cuenta autorizada puede administrar la tienda.</p>
-        <div class="admin-campo">
-            <label>Correo autorizado</label>
-            <div class="admin-login-correo">erickorgz07@gmail.com</div>
-        </div>
-        <div class="admin-campo" style="margin-top:12px;">
-            <label for="admin-password">Contraseña</label>
-            <input id="admin-password" type="password" autocomplete="current-password" placeholder="Tu contraseña de administrador">
-        </div>
-        <div class="admin-acciones">
-            <button class="admin-btn principal" id="admin-login-btn" type="button">Entrar</button>
-        </div>
-        <div id="admin-login-estado" class="admin-estado"></div>
-    </div>
-</div>
-
-<!-- PANEL ADMINISTRADOR -->
-<div id="admin-panel" class="admin-overlay" aria-hidden="true">
-    <div class="admin-caja">
-        <button class="admin-cerrar" type="button" id="admin-panel-cerrar">×</button>
-        <h2 class="admin-titulo">⚙️ Administrar tienda</h2>
-        <p class="admin-subtitulo">Agrega o modifica productos, tallas, precios y el contenido del sitio sin tocar el código.</p>
-
-        <div class="admin-tabs" style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
-            <button type="button" class="admin-btn secundario" id="tab-btn-productos" style="flex:1;min-width:140px;">📦 Productos</button>
-            <button type="button" class="admin-btn secundario" id="tab-btn-contenido" style="flex:1;min-width:140px;">🛠️ Contenido del sitio</button>
-        </div>
-
-        <div class="admin-vista visible" id="admin-vista-productos">
-            <div class="admin-form-grid">
-                <div class="admin-campo full">
-                    <label for="admin-nombre">Nombre del producto</label>
-                    <input id="admin-nombre" type="text" placeholder="Ej. Hoodie Camo Rosa">
-                </div>
-                <div class="admin-campo">
-                    <label for="admin-precio">Precio</label>
-                    <input id="admin-precio" type="number" min="0" step="0.01" placeholder="400">
-                </div>
-                <div class="admin-campo">
-                    <label for="admin-tallas">Tallas</label>
-                    <input id="admin-tallas" type="text" placeholder="S, M, G, XL">
-                </div>
-                <div class="admin-campo">
-                    <label for="admin-etiqueta">Etiqueta</label>
-                    <input id="admin-etiqueta" type="text" placeholder="NUEVO / RETRO / MÁS VENDIDO">
-                </div>
-                <div class="admin-campo">
-                    <label for="admin-orden">Orden</label>
-                    <input id="admin-orden" type="number" step="1" placeholder="1">
-                </div>
-                <div class="admin-campo full">
-                    <label for="admin-detalle">Descripción</label>
-                    <textarea id="admin-detalle" placeholder="Descripción que verá el cliente"></textarea>
-                </div>
-                <div class="admin-campo full">
-                    <label for="admin-imagen">Imagen del producto</label>
-                    <input id="admin-imagen" type="file" accept="image/*">
-                    <small style="color:#999;">También puedes dejarla vacía al editar para conservar la imagen actual.</small>
-                </div>
-                <div class="admin-campo">
-                    <label><input id="admin-activo" type="checkbox" checked> Producto visible</label>
-                </div>
-                <div class="admin-campo">
-                    <label><input id="admin-destacado" type="checkbox"> Producto destacado</label>
-                </div>
-            </div>
-
-            <div class="admin-acciones">
-                <button class="admin-btn principal" id="admin-guardar" type="button">➕ Publicar producto</button>
-                <button class="admin-btn secundario" id="admin-cancelar" type="button" style="display:none;">Cancelar edición</button>
-                <button class="admin-btn secundario" id="admin-cerrar-sesion" type="button">Cerrar sesión</button>
-            </div>
-            <div id="admin-estado" class="admin-estado"></div>
-
-            <h3 style="margin-top:26px;color:white;">Productos</h3>
-            <div id="admin-lista" class="admin-lista"></div>
-        </div>
-
-        <div class="admin-vista" id="admin-vista-contenido">
-
-            <h3 style="color:white;">Identidad y encabezado</h3>
-            <div class="admin-form-grid">
-                <div class="admin-campo full">
-                    <label for="cfg-logo">Logo (deja vacío para conservar el actual)</label>
-                    <input id="cfg-logo" type="file" accept="image/*">
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-titulo-header">Título principal</label>
-                    <input id="cfg-titulo-header" type="text">
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-subtitulo-header">Subtítulo del encabezado</label>
-                    <input id="cfg-subtitulo-header" type="text">
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-topbar">Barra superior (una frase por línea)</label>
-                    <textarea id="cfg-topbar" rows="4"></textarea>
-                </div>
-            </div>
-
-            <h3 style="color:white;">Hero (sección principal)</h3>
-            <div class="admin-form-grid">
-                <div class="admin-campo full">
-                    <label for="cfg-hero-titulo">Título del hero</label>
-                    <input id="cfg-hero-titulo" type="text">
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-hero-texto">Texto del hero</label>
-                    <textarea id="cfg-hero-texto" rows="3"></textarea>
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-hero-badges">Etiquetas del hero (una por línea)</label>
-                    <textarea id="cfg-hero-badges" rows="4"></textarea>
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-hero-card-titulo">Título de la tarjeta lateral</label>
-                    <input id="cfg-hero-card-titulo" type="text">
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-hero-card-items">Puntos de la tarjeta lateral (uno por línea)</label>
-                    <textarea id="cfg-hero-card-items" rows="4"></textarea>
-                </div>
-            </div>
-
-            <h3 style="color:white;">Buscador y catálogo</h3>
-            <div class="admin-form-grid">
-                <div class="admin-campo full">
-                    <label for="cfg-buscador-placeholder">Placeholder del buscador</label>
-                    <input id="cfg-buscador-placeholder" type="text">
-                </div>
-                <div class="admin-campo">
-                    <label for="cfg-catalogo-titulo">Título del catálogo</label>
-                    <input id="cfg-catalogo-titulo" type="text">
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-catalogo-subtitulo">Subtítulo del catálogo</label>
-                    <input id="cfg-catalogo-subtitulo" type="text">
-                </div>
-            </div>
-
-            <h3 style="color:white;">Contacto</h3>
-            <div class="admin-form-grid">
-                <div class="admin-campo">
-                    <label for="cfg-whatsapp">Número de WhatsApp (con código de país, sin +)</label>
-                    <input id="cfg-whatsapp" type="text" placeholder="525644006892">
-                </div>
-                <div class="admin-campo">
-                    <label for="cfg-instagram">Link de Instagram</label>
-                    <input id="cfg-instagram" type="text" placeholder="https://www.instagram.com/tu_cuenta/">
-                </div>
-            </div>
-
-            <h3 style="color:white;">Estampado y mensaje de pedido</h3>
-            <div class="admin-form-grid">
-                <div class="admin-campo">
-                    <label for="cfg-estampado-precio">Costo extra del estampado ($)</label>
-                    <input id="cfg-estampado-precio" type="number" min="0" step="0.01">
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-mensaje-plantilla">Mensaje que se envía por WhatsApp / Instagram</label>
-                    <textarea id="cfg-mensaje-plantilla" rows="8"></textarea>
-                    <small style="color:#999;">
-                        Puedes usar: {producto} {precio} {talla} {cantidad} {estampado_linea} {detalle} {comentarios}.
-                        No borres las llaves {} de las que quieras conservar.
-                    </small>
-                </div>
-            </div>
-
-            <h3 style="color:white;">¿Por qué comprar aquí?</h3>
-            <div class="admin-form-grid">
-                <div class="admin-campo full">
-                    <label for="cfg-beneficios-titulo">Título de la sección</label>
-                    <input id="cfg-beneficios-titulo" type="text">
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-beneficios">Tarjetas (formato: Título | Texto, una por línea)</label>
-                    <textarea id="cfg-beneficios" rows="5" placeholder="Calidad premium | Modelos seleccionados con gran presencia visual."></textarea>
-                </div>
-            </div>
-
-            <h3 style="color:white;">Reseñas de clientes</h3>
-            <div class="admin-form-grid">
-                <div class="admin-campo full">
-                    <label for="cfg-testimonios-titulo">Título de la sección</label>
-                    <input id="cfg-testimonios-titulo" type="text">
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-resenas">Reseñas (formato: Nombre | Comentario, una por línea)</label>
-                    <textarea id="cfg-resenas" rows="5" placeholder="Cliente HEAVEN | Muy buena calidad y la atención fue súper rápida."></textarea>
-                </div>
-            </div>
-
-            <h3 style="color:white;">Popups promocionales</h3>
-            <div class="admin-form-grid">
-                <div class="admin-campo">
-                    <label for="cfg-popup1-imagen">Imagen popup 1</label>
-                    <input id="cfg-popup1-imagen" type="file" accept="image/*">
-                </div>
-                <div class="admin-campo">
-                    <label><input id="cfg-popup1-activo" type="checkbox"> Mostrar popup 1</label>
-                </div>
-                <div class="admin-campo">
-                    <label for="cfg-popup2-imagen">Imagen popup 2</label>
-                    <input id="cfg-popup2-imagen" type="file" accept="image/*">
-                </div>
-                <div class="admin-campo">
-                    <label><input id="cfg-popup2-activo" type="checkbox"> Mostrar popup 2</label>
-                </div>
-            </div>
-
-            <h3 style="color:white;">Pie de página</h3>
-            <div class="admin-form-grid">
-                <div class="admin-campo full">
-                    <label for="cfg-footer-descripcion">Descripción de la tienda</label>
-                    <textarea id="cfg-footer-descripcion" rows="2"></textarea>
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-footer-horario">Líneas de "Horario" (una por línea)</label>
-                    <textarea id="cfg-footer-horario" rows="2"></textarea>
-                </div>
-                <div class="admin-campo full">
-                    <label for="cfg-footer-copy">Texto de derechos reservados (una línea por renglón)</label>
-                    <textarea id="cfg-footer-copy" rows="2"></textarea>
-                </div>
-            </div>
-
-            <div class="admin-acciones">
-                <button class="admin-btn principal" id="cfg-guardar" type="button">💾 Guardar contenido del sitio</button>
-                <button class="admin-btn secundario" id="admin-cerrar-sesion-2" type="button">Cerrar sesión</button>
-            </div>
-            <div id="cfg-estado" class="admin-estado"></div>
-
-        </div>
-    </div>
-</div>
-
-<!-- CATALOGO -->
-
-<section class="catalogo" id="catalogo">
-
-
-    <div
-        class="tarjeta-producto"
-        onclick="abrirDetalleProducto(this)"
-        data-producto="Camo Rose Utility Jacket"
-        data-precio="950"
-        data-tallas="S, M, L, XL"
-        data-detalle="Chamarra utilitaria camuflado rosa con bolsillos funcionales y corte oversize."
-    >
-
-        <span class="badge-producto">NUEVO</span>
-
-        <div class="imagen-contenedor">
-
-            <img
-                src="https://placehold.co/600x750/e874ae/141414?text=Camo+Rose+%0AUtility+Jacket"
-                alt="Camo Rose Utility Jacket"
-            >
-
-        </div>
-
-        <div class="overlay-galeria"></div>
-
-        <div class="contenido-galeria">
-
-            <h3>Camo Rose Utility Jacket</h3>
-
-            <p class="precio">$950.00</p>
-
-            <div class="tallas-contenedor">
-                Tallas:
-                <span>S, M, L, XL</span>
-            </div>
-
-            <p class="detalle-extra">
-                Chamarra utilitaria camuflado rosa con bolsillos funcionales y corte oversize.
-            </p>
-
-        </div>
-
-    </div>
-
-    <div
-        class="tarjeta-producto"
-        onclick="abrirDetalleProducto(this)"
-        data-producto="Pink Camo Tee"
-        data-precio="420"
-        data-tallas="S, M, L, XL, XXL"
-        data-detalle="Playera oversize con estampado camuflado rosa, 100% algodón."
-    >
-
-        <span class="badge-producto">MÁS VENDIDO</span>
-
-        <div class="imagen-contenedor">
-
-            <img
-                src="https://placehold.co/600x750/f2a9cf/141414?text=Pink+Camo+Tee"
-                alt="Pink Camo Tee"
-            >
-
-        </div>
-
-        <div class="overlay-galeria"></div>
-
-        <div class="contenido-galeria">
-
-            <h3>Pink Camo Tee</h3>
-
-            <p class="precio">$420.00</p>
-
-            <div class="tallas-contenedor">
-                Tallas:
-                <span>S, M, L, XL, XXL</span>
-            </div>
-
-            <p class="detalle-extra">
-                Playera oversize con estampado camuflado rosa, 100% algodón.
-            </p>
-
-        </div>
-
-    </div>
-
-    <div
-        class="tarjeta-producto"
-        onclick="abrirDetalleProducto(this)"
-        data-producto="Urban Camo Joggers"
-        data-precio="680"
-        data-tallas="S, M, L, XL"
-        data-detalle="Jogger urbano camuflado rosa con jareta ajustable y bolsillos laterales."
-    >
-
-        <span class="badge-producto">EDICIÓN LIMITADA</span>
-
-        <div class="imagen-contenedor">
-
-            <img
-                src="https://placehold.co/600x750/9c1f5c/ffffff?text=Urban+Camo+%0AJoggers"
-                alt="Urban Camo Joggers"
-            >
-
-        </div>
-
-        <div class="overlay-galeria"></div>
-
-        <div class="contenido-galeria">
-
-            <h3>Urban Camo Joggers</h3>
-
-            <p class="precio">$680.00</p>
-
-            <div class="tallas-contenedor">
-                Tallas:
-                <span>S, M, L, XL</span>
-            </div>
-
-            <p class="detalle-extra">
-                Jogger urbano camuflado rosa con jareta ajustable y bolsillos laterales.
-            </p>
-
-        </div>
-
-    </div>
-
-    <div
-        class="tarjeta-producto"
-        onclick="abrirDetalleProducto(this)"
-        data-producto="Urban Camo Joggers Black"
-        data-precio="680"
-        data-tallas="S, M, L, XL, XXL"
-        data-detalle="Versión negra del jogger urbano, con detalles camuflado rosa."
-    >
-
-        <span class="badge-producto">NUEVO</span>
-
-        <div class="imagen-contenedor">
-
-            <img
-                src="https://placehold.co/600x750/141414/f2a9cf?text=Urban+Camo+%0AJoggers+Black"
-                alt="Urban Camo Joggers Black"
-            >
-
-        </div>
-
-        <div class="overlay-galeria"></div>
-
-        <div class="contenido-galeria">
-
-            <h3>Urban Camo Joggers Black</h3>
-
-            <p class="precio">$680.00</p>
-
-            <div class="tallas-contenedor">
-                Tallas:
-                <span>S, M, L, XL, XXL</span>
-            </div>
-
-            <p class="detalle-extra">
-                Versión negra del jogger urbano, con detalles camuflado rosa.
-            </p>
-
-        </div>
-
-    </div>
-
-    <div
-        class="tarjeta-producto"
-        onclick="abrirDetalleProducto(this)"
-        data-producto="Urban Camo Hoodie"
-        data-precio="890"
-        data-tallas="S, M, L, XL, XXL"
-        data-detalle="Hoodie oversize camuflado rosa con bolsillo canguro y capucha forrada."
-    >
-
-        <span class="badge-producto">EDICIÓN LIMITADA</span>
-
-        <div class="imagen-contenedor">
-
-            <img
-                src="https://placehold.co/600x750/d6337e/ffffff?text=Urban+Camo+%0AHoodie"
-                alt="Urban Camo Hoodie"
-            >
-
-        </div>
-
-        <div class="overlay-galeria"></div>
-
-        <div class="contenido-galeria">
-
-            <h3>Urban Camo Hoodie</h3>
-
-            <p class="precio">$890.00</p>
-
-            <div class="tallas-contenedor">
-                Tallas:
-                <span>S, M, L, XL, XXL</span>
-            </div>
-
-            <p class="detalle-extra">
-                Hoodie oversize camuflado rosa con bolsillo canguro y capucha forrada.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<div id="sin-resultados" class="sin-resultados">
-    No encontramos productos con esa búsqueda.
-</div>
-
-
-<!-- BENEFICIOS -->
-
-<section class="beneficios">
-
-    <h2 id="beneficios-titulo">¿Por qué comprar aquí?</h2>
-
-    <div class="grid-beneficios" id="beneficios-lista">
-
-        <div class="beneficio-card">
-            <h3>Calidad premium</h3>
-            <p>
-                Piezas seleccionadas con gran presencia visual
-                y acabados atractivos.
-            </p>
-        </div>
-
-        <div class="beneficio-card">
-            <h3>Streetwear auténtico</h3>
-            <p>
-                Diseños camuflados con identidad urbana,
-                pensados para destacar.
-            </p>
-        </div>
-
-        <div class="beneficio-card">
-            <h3>Atención directa</h3>
-            <p>
-                Comunicación rápida para resolver dudas,
-                tallas y disponibilidad.
-            </p>
-        </div>
-
-        <div class="beneficio-card">
-            <h3>Piezas exclusivas</h3>
-            <p>
-                Modelos limitados que resaltan por su diseño
-                dentro del catálogo.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- TESTIMONIOS -->
-
-<section class="testimonios">
-
-    <h2 id="testimonios-titulo">Lo que dicen nuestros clientes</h2>
-
-    <div class="grid-testimonios" id="testimonios-lista">
-
-        <div class="testimonio">
-            <p>
-                "Muy buena calidad y la atención fue súper rápida."
-            </p>
-            <strong>— Cliente HEAVEN</strong>
-        </div>
-
-        <div class="testimonio">
-            <p>
-                "La prenda llegó excelente, se ve todavía mejor en persona."
-            </p>
-            <strong>— Cliente satisfecho</strong>
-        </div>
-
-        <div class="testimonio">
-            <p>
-                "Atención rápida y modelos diferentes a los de otras tiendas."
-            </p>
-            <strong>— Comprador frecuente</strong>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-    <div class="footer-contenido">
-
-        <div class="footer-col">
-
-            <h3>HEAVEN DIVISIÓN</h3>
-
-            <p id="footer-descripcion">
-                Streetwear urbano con actitud, calidad y diseño exclusivo.
-            </p>
-
-        </div>
-
-        <div class="footer-col">
-
-            <h3>Contacto</h3>
-
-            <a
-                id="footer-instagram-link"
-                href="https://www.instagram.com/heavendivision/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Instagram oficial
-            </a>
-
-            <a
-                id="footer-whatsapp-link"
-                href="https://wa.me/525644006892"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                WhatsApp: 56 4400 6892
-            </a>
-
-            <p>Atención directa por mensaje</p>
-
-        </div>
-
-        <div class="footer-col">
-
-            <h3>Horario</h3>
-
-            <div id="footer-horario-lista">
-                <p>Lunes a sábado</p>
-                <p>Sujeto a disponibilidad</p>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="footer-copy" id="footer-copy-texto">
-        © 2026 HEAVEN DIVISIÓN · Todos los derechos reservados.
-    </div>
-
-</footer>
-
-
-<!-- POPUP PROMOCION -->
-
-<div id="popup-promocion" class="popup-promocion">
-
-    <div class="popup-contenido">
-
-        <button
-            id="cerrar-popup"
-            class="cerrar-popup"
-            aria-label="Cerrar promoción"
-        >
-            ×
-        </button>
-
-        <img
-            id="popup1-imagen"
-            src="https://i.postimg.cc/8zhkfkXX/Post-de-Instagram-(34)-Descuentos-Promociones-Fashion-Elegante-Minimalista-Blanco-y-Negro.jpg"
-            alt="Promoción HEAVEN DIVISIÓN"
-        >
-
-    </div>
-
-</div>
-
-
-<!-- POPUP PROMOCION 2 (IMAGEN) -->
-
-<div id="popup-promocion-2" class="popup-promocion oculto">
-
-    <div class="popup-contenido popup-contenido--chico">
-
-        <button
-            id="cerrar-popup-2"
-            class="cerrar-popup"
-            aria-label="Cerrar promoción"
-        >
-            ×
-        </button>
-
-        <img
-            id="popup2-imagen"
-            src="https://i.postimg.cc/DfC2Y1vX/IMG-0296.jpg"
-            alt="Promoción HEAVEN DIVISIÓN"
-        >
-
-    </div>
-
-</div>
-
-
-<!-- MODAL DETALLE DE PRODUCTO -->
-
-<div
-    id="modal-detalle-producto"
-    class="modal-detalle-producto oculto"
->
-
-    <div class="detalle-caja">
-
-        <button
-            type="button"
-            class="cerrar-modal"
-            id="cerrar-detalle-producto"
-        >
-            ×
-        </button>
-
-        <div class="detalle-imagen-contenedor">
-
-            <img
-                id="detalle-imagen"
-                src=""
-                alt=""
-            >
-
-        </div>
-
-        <div class="detalle-info">
-
-            <h2 id="detalle-nombre">
-                Producto
-            </h2>
-
-            <p class="precio" id="detalle-precio">
-                Precio
-            </p>
-
-            <div class="tallas-contenedor">
-                Tallas:
-                <span id="detalle-tallas"></span>
-            </div>
-
-            <p class="detalle-extra" id="detalle-texto">
-                Detalles
-            </p>
-
-            <div class="acciones-producto">
-
-                <button
-                    class="btn-instagram"
-                    id="detalle-btn-instagram"
-                >
-                    📸 Pedir Instagram
-                </button>
-
-                <button
-                    class="btn-whatsapp"
-                    id="detalle-btn-whatsapp"
-                >
-                    🟢 Pedir WhatsApp
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- MODAL DE PEDIDO -->
-
-<div
-    id="modal-pedido"
-    class="modal-pedido oculto"
->
-
-    <div class="modal-caja">
-
-        <button
-            type="button"
-            class="cerrar-modal"
-            id="cerrar-modal"
-        >
-            ×
-        </button>
-
-        <h2 id="titulo-modal">
-            Realizar pedido
-        </h2>
-
-        <p
-            id="subtitulo-modal"
-            class="modal-subtitulo"
-        >
-            Completa los datos de tu pedido.
+  </header>
+
+  <!-- ---- Hero / Escaparate ---- -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-6">
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <p class="hero-rise hero-rise-1 text-xs font-bold tracking-widest text-blush-600 mb-3">TEMPORADA ACTUAL</p>
+        <h1 class="hero-rise hero-rise-1 font-display text-4xl sm:text-6xl leading-[0.95] mb-5">
+          LA CALLE<br>ES NUESTRO<br>ESCAPARATE
+        </h1>
+        <p class="hero-rise hero-rise-2 text-ink/70 max-w-md mb-7 leading-relaxed">
+          Piezas pensadas para moverse contigo. Cortes limpios, tonos suaves y una actitud urbana sin esfuerzo — así es HEAVEN DIVISION.
         </p>
-
-        <div class="producto-resumen">
-
-            <strong id="modal-producto">
-                Producto
-            </strong>
-
-            <span id="modal-precio">
-                Precio
-            </span>
-
-            <span id="modal-detalle">
-                Detalles
-            </span>
-
-        </div>
-
-
-        <div class="campo-formulario">
-
-            <label for="pedido-talla">
-                Talla
-            </label>
-
-            <select id="pedido-talla">
-
-                <option value="">
-                    Selecciona una talla
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="campo-formulario">
-
-            <label for="pedido-cantidad">
-                Cantidad
-            </label>
-
-            <input
-                type="number"
-                id="pedido-cantidad"
-                min="1"
-                step="1"
-                inputmode="numeric"
-                placeholder="Escribe la cantidad"
-            >
-
-        </div>
-
-
-        <div class="campo-formulario">
-
-            <label
-                for="pedido-estampado"
-                class="campo-estampado"
-            >
-
-                <input
-                    type="checkbox"
-                    id="pedido-estampado"
-                >
-
-                <span class="campo-estampado-texto">
-
-                    <strong>
-                        Estampado nombre y número
-                    </strong>
-
-                    <span id="estampado-precio-texto">
-                        + $50.00 costo extra
-                    </span>
-
-                </span>
-
-            </label>
-
-            <div
-                id="datos-estampado"
-                class="campo-estampado-datos"
-                style="display:none;"
-            >
-
-                <input
-                    type="text"
-                    id="pedido-estampado-nombre"
-                    placeholder="Nombre para el estampado"
-                >
-
-                <input
-                    type="text"
-                    id="pedido-estampado-numero"
-                    placeholder="Número para el estampado"
-                    inputmode="numeric"
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="campo-formulario">
-
-            <label for="pedido-comentarios">
-                Comentarios adicionales
-            </label>
-
-            <textarea
-                id="pedido-comentarios"
-                placeholder="Ejemplo: ¿Tienen esta prenda disponible en talla M?"
-            ></textarea>
-
-        </div>
-
-
-        <!-- WHATSAPP -->
-
-        <button
-            type="button"
-            id="boton-confirmar-whatsapp"
-            class="boton-generar boton-whatsapp-modal"
-        >
-            🟢 Continuar por WhatsApp
+        <button onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})"
+          class="hero-rise hero-rise-3 bg-ink text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-blush-600 transition-colors">
+          Ver colección
         </button>
+      </div>
 
-
-        <!-- INSTAGRAM -->
-
-        <button
-            type="button"
-            id="boton-confirmar-instagram"
-            class="boton-generar boton-instagram-modal"
-            style="display:none;"
-        >
-            📸 Copiar mensaje y abrir Instagram
-        </button>
-
-
-        <div
-            id="aviso-instagram"
-            class="aviso-instagram"
-            style="display:none;"
-        >
-            Tu mensaje se copiará automáticamente.
-            Después podrás pegarlo en el chat de Instagram.
+      <!-- Imagen del escaparate: la sube el admin desde el panel (igual que el logo) -->
+      <div id="hero-image-wrap" class="shelf-fade relative rounded-2xl overflow-hidden border border-ink/10 bg-blush-50 aspect-[4/5] sm:aspect-[5/4]">
+        <img id="hero-image" src="" alt="Escaparate HEAVEN DIVISION" class="hidden w-full h-full object-cover" />
+        <div id="hero-image-placeholder" class="w-full h-full flex flex-col items-center justify-center gap-2 text-ink/40 px-6 text-center">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <p class="text-sm">Aún no hay imagen de escaparate. Súbela desde el panel de administrador.</p>
         </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ---- Catálogo ---- -->
+  <section id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="font-display text-2xl sm:text-3xl">CATÁLOGO</h2>
+      <p id="catalogo-count" class="text-sm text-ink/50"></p>
     </div>
 
+    <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      <!-- Las tarjetas de producto se insertan aquí dinámicamente -->
+    </div>
+
+    <p id="empty-state" class="hidden text-center text-ink/50 py-16">
+      Aún no hay prendas publicadas. Vuelve pronto ✨
+    </p>
+  </section>
+
+  <!-- ---- Footer ---- -->
+  <footer class="border-t border-ink/10 mt-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid sm:grid-cols-3 gap-8 text-sm">
+      <div>
+        <p class="font-display text-lg mb-2">HEAVEN DIVISION</p>
+        <p class="text-ink/60">Streetwear sofisticado, directo a tu puerta.</p>
+      </div>
+      <div>
+        <p class="font-semibold mb-2">Contacto</p>
+        <p class="text-ink/60">WhatsApp y Instagram disponibles desde tu carrito de compra.</p>
+      </div>
+      <div>
+        <p class="font-semibold mb-2">Tienda</p>
+        <p class="text-ink/60">© <span id="year"></span> Heaven Division. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ---- Botón flotante de carrito (móvil / respaldo) ---- -->
+  <button id="cart-fab" class="fixed bottom-5 right-5 bg-ink text-white rounded-full w-14 h-14 shadow-lg flex items-center justify-center hover:bg-blush-600 transition-colors z-30">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
+  </button>
+
+  <!-- ---- Carrito lateral (drawer) ---- -->
+  <div id="cart-overlay" class="hidden fixed inset-0 bg-ink/40 z-40 opacity-0"></div>
+  <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-white z-50 shadow-2xl translate-x-full flex flex-col">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-ink/10">
+      <h3 class="font-display text-xl">TU CARRITO</h3>
+      <button id="cart-close" aria-label="Cerrar carrito" class="hover:text-blush-600">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div id="cart-items" class="flex-1 overflow-y-auto px-5 py-4 flex flex-col gap-4"></div>
+
+    <p id="cart-empty-msg" class="hidden text-center text-ink/50 py-10 px-5">Tu carrito está vacío.</p>
+
+    <div class="border-t border-ink/10 px-5 py-4">
+      <label for="cart-note" class="text-xs font-semibold text-ink/60 block mb-1">
+        Nota extra para tu pedido (tallas, colores, dirección)
+      </label>
+      <textarea id="cart-note" rows="2"
+        class="w-full border border-ink/20 rounded-lg px-3 py-2 text-sm resize-none focus:border-blush-600 transition-colors"
+        placeholder="Ej: Talla M, color negro, entregar en..."></textarea>
+
+      <div class="flex items-center justify-between mt-4 mb-3">
+        <span class="font-semibold">Total</span>
+        <span id="cart-total" class="font-display text-xl">$0.00</span>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <button id="checkout-whatsapp"
+          class="w-full bg-[#25D366] text-white rounded-full py-3 text-sm font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+          Pedir por WhatsApp
+        </button>
+        <button id="checkout-instagram"
+          class="w-full bg-ink text-white rounded-full py-3 text-sm font-semibold flex items-center justify-center gap-2 hover:bg-blush-600 transition-colors">
+          Pedir por Instagram
+        </button>
+      </div>
+    </div>
+  </aside>
 </div>
 
+<!-- ======================================================= -->
+<!-- VISTA: ADMINISTRADOR (index.html?view=admin)             -->
+<!-- ======================================================= -->
+<div id="admin-app" class="hidden min-h-screen bg-blush-50">
 
-<!-- MENSAJE COPIADO -->
+  <!-- ---- Pantalla de login ---- -->
+  <div id="admin-login" class="min-h-screen flex items-center justify-center px-4">
+    <form id="admin-login-form" class="bg-white border border-ink/10 rounded-2xl shadow-sm p-8 w-full max-w-sm">
+      <p class="font-display text-2xl mb-1">HEAVEN DIVISION</p>
+      <p class="text-ink/60 text-sm mb-6">Panel de administrador</p>
+      <label class="text-xs font-semibold text-ink/60 block mb-1">Contraseña</label>
+      <input id="admin-password" type="password" required
+        class="w-full border border-ink/20 rounded-lg px-3 py-2 mb-2 focus:border-blush-600 transition-colors" />
+      <p id="admin-login-error" class="hidden text-xs text-red-500 mb-3">Contraseña incorrecta.</p>
+      <button type="submit" class="w-full bg-ink text-white rounded-full py-3 text-sm font-semibold hover:bg-blush-600 transition-colors mt-2">
+        Entrar
+      </button>
+      <a href="index.html" class="block text-center text-xs text-ink/50 mt-4 hover:text-blush-600">← Volver a la tienda</a>
+    </form>
+  </div>
 
-<div
-    id="mensaje-copiado"
-    class="mensaje-copiado"
->
-    ✅ Mensaje copiado. Pégalo en Instagram.
+  <!-- ---- Dashboard admin ---- -->
+  <div id="admin-dashboard" class="hidden max-w-5xl mx-auto px-4 sm:px-6 py-10">
+    <div class="flex items-center justify-between mb-8">
+      <p class="font-display text-2xl">PANEL ADMIN</p>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="text-sm font-semibold hover:text-blush-600">Ver tienda</a>
+        <button id="admin-logout" class="text-sm font-semibold text-red-500 hover:opacity-70">Salir</button>
+      </div>
+    </div>
+
+    <!-- Configuración de la barra superior -->
+    <section class="bg-white border border-ink/10 rounded-2xl p-6 mb-8">
+      <h2 class="font-semibold mb-4">Barra superior de anuncios</h2>
+      <form id="topbar-form" class="flex flex-col sm:flex-row gap-3">
+        <input id="topbar-input" type="text" required placeholder="Texto de la barra superior"
+          class="flex-1 border border-ink/20 rounded-lg px-3 py-2 focus:border-blush-600 transition-colors" />
+        <button type="submit" class="bg-ink text-white rounded-full px-6 py-2 text-sm font-semibold hover:bg-blush-600 transition-colors">
+          Guardar
+        </button>
+      </form>
+      <p id="topbar-saved-msg" class="hidden text-xs text-green-600 mt-2">Guardado ✓</p>
+    </section>
+
+    <!-- Imágenes de la tienda: logo y escaparate principal -->
+    <section class="bg-white border border-ink/10 rounded-2xl p-6 mb-8">
+      <h2 class="font-semibold mb-4">Imágenes de la tienda</h2>
+      <form id="images-form" class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs font-semibold text-ink/60 block mb-1">URL del logo (barra de navegación)</label>
+          <input id="logo-url-input" type="url" placeholder="https://..." class="w-full border border-ink/20 rounded-lg px-3 py-2 focus:border-blush-600 transition-colors" />
+          <p class="text-xs text-ink/40 mt-1">Déjalo vacío para mostrar el nombre en texto.</p>
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-ink/60 block mb-1">URL de la imagen del escaparate (hero)</label>
+          <input id="hero-url-input" type="url" placeholder="https://..." class="w-full border border-ink/20 rounded-lg px-3 py-2 focus:border-blush-600 transition-colors" />
+          <p class="text-xs text-ink/40 mt-1">Se muestra en grande junto al título principal.</p>
+        </div>
+        <div class="sm:col-span-2">
+          <button type="submit" class="bg-ink text-white rounded-full px-6 py-2 text-sm font-semibold hover:bg-blush-600 transition-colors">
+            Guardar imágenes
+          </button>
+          <span id="images-saved-msg" class="hidden text-xs text-green-600 ml-3">Guardado ✓</span>
+        </div>
+      </form>
+    </section>
+
+    <!-- Nueva prenda -->
+    <section class="bg-white border border-ink/10 rounded-2xl p-6 mb-8">
+      <h2 class="font-semibold mb-4">Publicar nueva prenda</h2>
+      <form id="product-form" class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs font-semibold text-ink/60 block mb-1">Nombre</label>
+          <input id="product-nombre" type="text" required class="w-full border border-ink/20 rounded-lg px-3 py-2 focus:border-blush-600 transition-colors" />
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-ink/60 block mb-1">Precio</label>
+          <input id="product-precio" type="number" min="0" step="0.01" required class="w-full border border-ink/20 rounded-lg px-3 py-2 focus:border-blush-600 transition-colors" />
+        </div>
+        <div class="sm:col-span-2">
+          <label class="text-xs font-semibold text-ink/60 block mb-1">Descripción breve</label>
+          <textarea id="product-descripcion" rows="2" required class="w-full border border-ink/20 rounded-lg px-3 py-2 resize-none focus:border-blush-600 transition-colors"></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="text-xs font-semibold text-ink/60 block mb-1">URL de la imagen</label>
+          <input id="product-imagen" type="url" placeholder="https://..." required class="w-full border border-ink/20 rounded-lg px-3 py-2 focus:border-blush-600 transition-colors" />
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-ink/60 block mb-1">Categoría</label>
+          <select id="product-categoria" class="w-full border border-ink/20 rounded-lg px-3 py-2 focus:border-blush-600 transition-colors">
+            <option value="COLLECTIONS">Collections</option>
+            <option value="WOMEN">Women</option>
+            <option value="MEN">Men</option>
+            <option value="ACCESSORIES">Accessories</option>
+            <option value="GENERAL">General</option>
+          </select>
+        </div>
+        <div class="flex items-end">
+          <button type="submit" class="w-full bg-ink text-white rounded-full px-6 py-2 text-sm font-semibold hover:bg-blush-600 transition-colors">
+            Publicar prenda
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Lista de prendas -->
+    <section class="bg-white border border-ink/10 rounded-2xl p-6">
+      <h2 class="font-semibold mb-4">Prendas publicadas</h2>
+      <div id="admin-product-list" class="flex flex-col divide-y divide-ink/10"></div>
+    </section>
+  </div>
 </div>
 
+<!-- ======================================================= -->
+<!-- LÓGICA DE LA APLICACIÓN                                   -->
+<!-- ======================================================= -->
+<script type="module">
+  // ---------------------------------------------------------
+  // 1. CONFIGURACIÓN DE SUPABASE
+  //    Reemplaza los siguientes valores con los de tu proyecto
+  //    (Project Settings → API en tu panel de Supabase).
+  // ---------------------------------------------------------
+  const SUPABASE_URL = "SUPABASE_URL";
+  const SUPABASE_ANON_KEY = "SUPABASE_ANON_KEY";
 
-<script>
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    /* =========================
-       BUSCADOR
-    ========================= */
+  // ---------------------------------------------------------
+  // 2. CONFIGURACIÓN GENERAL DEL SITIO
+  // ---------------------------------------------------------
+  const ADMIN_PASSWORD = "heaven2026"; // Cambia esta contraseña
+  const WHATSAPP_NUMBER = "5523389986"; // Ajusta el prefijo de país si es necesario, ej. 52 + número
+  const INSTAGRAM_PROFILE = "https://instagram.com";
 
-    const buscador = document.getElementById("buscador");
-    const productos = document.querySelectorAll(".tarjeta-producto");
-    const sinResultados = document.getElementById("sin-resultados");
+  // ---------------------------------------------------------
+  // 3. ESTADO EN MEMORIA
+  // ---------------------------------------------------------
+  const state = {
+    productos: [],
+    config: { top_bar_texto: "Envíos gratis en pedidos superiores a $999 · HEAVEN DIVISION", logo_url: "", hero_imagen_url: "" },
+    filtroCategoria: "",
+    filtroBusqueda: "",
+    carrito: [], // { id, nombre, precio, imagen_url, cantidad }
+  };
 
-    buscador.addEventListener("input", function() {
+  const fmt = (n) => `$${Number(n || 0).toFixed(2)}`;
 
-        const texto = this.value
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
+  // ---------------------------------------------------------
+  // 4. ROUTER SIMPLE POR PARÁMETRO DE URL (?view=admin)
+  // ---------------------------------------------------------
+  const params = new URLSearchParams(window.location.search);
+  const isAdminView = params.get("view") === "admin";
 
-        let encontrados = 0;
+  document.getElementById("store-app").classList.toggle("hidden", isAdminView);
+  document.getElementById("admin-app").classList.toggle("hidden", !isAdminView);
 
-        productos.forEach(function(producto) {
+  // ---------------------------------------------------------
+  // 5. CARGA DE DATOS DESDE SUPABASE
+  // ---------------------------------------------------------
+  async function cargarConfiguracion() {
+    const { data, error } = await supabaseClient
+      .from("configuracion_tienda")
+      .select("*")
+      .eq("id", 1)
+      .maybeSingle();
+    if (!error && data) {
+      state.config = data;
+      renderConfiguracion();
+    }
+  }
 
-            const contenido = producto.textContent
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "");
+  async function cargarProductos() {
+    const { data, error } = await supabaseClient
+      .from("productos")
+      .select("*")
+      .order("creado_en", { ascending: false });
+    if (!error && data) {
+      state.productos = data;
+      renderProductGrid();
+      renderAdminProductList();
+    }
+  }
 
-            if (contenido.includes(texto)) {
+  // ---------------------------------------------------------
+  // 6. RENDERIZADO — TIENDA
+  // ---------------------------------------------------------
+  function renderConfiguracion() {
+    document.getElementById("top-bar-text").textContent = state.config.top_bar_texto || "";
+    const topbarInput = document.getElementById("topbar-input");
+    if (topbarInput && document.activeElement !== topbarInput) {
+      topbarInput.value = state.config.top_bar_texto || "";
+    }
 
-                producto.style.display = "";
-                encontrados++;
+    // Logo de la barra de navegación
+    const logoImg = document.getElementById("nav-logo-img");
+    const logoText = document.getElementById("nav-logo-text");
+    if (state.config.logo_url) {
+      logoImg.src = state.config.logo_url;
+      logoImg.classList.remove("hidden");
+      logoText.classList.add("hidden");
+    } else {
+      logoImg.classList.add("hidden");
+      logoText.classList.remove("hidden");
+    }
 
-            } else {
+    // Imagen del escaparate (hero)
+    const heroImg = document.getElementById("hero-image");
+    const heroPlaceholder = document.getElementById("hero-image-placeholder");
+    if (state.config.hero_imagen_url) {
+      heroImg.src = state.config.hero_imagen_url;
+      heroImg.classList.remove("hidden");
+      heroPlaceholder.classList.add("hidden");
+    } else {
+      heroImg.classList.add("hidden");
+      heroPlaceholder.classList.remove("hidden");
+    }
 
-                producto.style.display = "none";
+    // Prellenar los inputs del panel admin
+    const logoInput = document.getElementById("logo-url-input");
+    const heroInput = document.getElementById("hero-url-input");
+    if (logoInput && document.activeElement !== logoInput) logoInput.value = state.config.logo_url || "";
+    if (heroInput && document.activeElement !== heroInput) heroInput.value = state.config.hero_imagen_url || "";
+  }
 
-            }
+  function productosFiltrados() {
+    const term = state.filtroBusqueda.trim().toLowerCase();
+    return state.productos.filter((p) => {
+      const coincideCategoria = !state.filtroCategoria || p.categoria === state.filtroCategoria;
+      const coincideBusqueda =
+        !term ||
+        p.nombre.toLowerCase().includes(term) ||
+        (p.descripcion || "").toLowerCase().includes(term);
+      return coincideCategoria && coincideBusqueda;
+    });
+  }
 
-        });
+  function tarjetaProducto(p) {
+    const imagen = p.imagen_url
+      ? `<img src="${escapeHtml(p.imagen_url)}" alt="${escapeHtml(p.nombre)}" class="w-full h-full object-cover" loading="lazy" />`
+      : `<div class="w-full h-full flex items-center justify-center bg-blush-100 text-blush-600">
+           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 4h6l1 3h3l-1 15H6L5 7h3z"/></svg>
+         </div>`;
 
-        sinResultados.style.display =
-            encontrados === 0 && texto.trim() !== ""
-                ? "block"
-                : "none";
+    return `
+      <article class="product-card border border-ink/10 rounded-2xl overflow-hidden bg-white flex flex-col">
+        <div class="aspect-[4/5] overflow-hidden bg-blush-50">${imagen}</div>
+        <div class="p-4 flex flex-col flex-1">
+          <h3 class="font-semibold leading-snug mb-1">${escapeHtml(p.nombre)}</h3>
+          <p class="text-xs text-ink/60 mb-3 line-clamp-2 flex-1">${escapeHtml(p.descripcion || "")}</p>
+          <div class="flex items-center justify-between">
+            <span class="font-display text-lg">${fmt(p.precio)}</span>
+            <button data-add-id="${p.id}" class="text-xs font-semibold bg-ink text-white rounded-full px-4 py-2 hover:bg-blush-600 transition-colors">
+              Añadir
+            </button>
+          </div>
+        </div>
+      </article>`;
+  }
 
+  function renderProductGrid() {
+    const lista = productosFiltrados();
+    const grid = document.getElementById("product-grid");
+    const empty = document.getElementById("empty-state");
+    const count = document.getElementById("catalogo-count");
+
+    grid.innerHTML = lista.map(tarjetaProducto).join("");
+    empty.classList.toggle("hidden", lista.length > 0);
+    count.textContent = lista.length ? `${lista.length} prenda${lista.length === 1 ? "" : "s"}` : "";
+
+    grid.querySelectorAll("[data-add-id]").forEach((btn) => {
+      btn.addEventListener("click", () => agregarAlCarrito(btn.getAttribute("data-add-id")));
+    });
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+  }
+
+  // ---------------------------------------------------------
+  // 7. NAVEGACIÓN Y BÚSQUEDA
+  // ---------------------------------------------------------
+  document.querySelectorAll("#category-nav .nav-link").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.filtroCategoria = btn.getAttribute("data-categoria") || "";
+      document.getElementById("catalogo").scrollIntoView({ behavior: "smooth" });
+      renderProductGrid();
+    });
+  });
+
+  const searchToggle = document.getElementById("search-toggle");
+  const searchBarWrap = document.getElementById("search-bar-wrap");
+  const searchInput = document.getElementById("search-input");
+
+  searchToggle.addEventListener("click", () => {
+    searchBarWrap.classList.toggle("hidden");
+    if (!searchBarWrap.classList.contains("hidden")) searchInput.focus();
+  });
+
+  searchInput.addEventListener("input", (e) => {
+    state.filtroBusqueda = e.target.value;
+    renderProductGrid();
+  });
+
+  // ---------------------------------------------------------
+  // 8. CARRITO DE COMPRAS
+  // ---------------------------------------------------------
+  const cartDrawer = document.getElementById("cart-drawer");
+  const cartOverlay = document.getElementById("cart-overlay");
+
+  function abrirCarrito() {
+    cartOverlay.classList.remove("hidden");
+    requestAnimationFrame(() => cartOverlay.classList.remove("opacity-0"));
+    cartDrawer.classList.remove("translate-x-full");
+  }
+
+  function cerrarCarrito() {
+    cartOverlay.classList.add("opacity-0");
+    cartDrawer.classList.add("translate-x-full");
+    setTimeout(() => cartOverlay.classList.add("hidden"), 300);
+  }
+
+  document.getElementById("cart-open").addEventListener("click", abrirCarrito);
+  document.getElementById("cart-fab").addEventListener("click", abrirCarrito);
+  document.getElementById("cart-close").addEventListener("click", cerrarCarrito);
+  cartOverlay.addEventListener("click", cerrarCarrito);
+
+  function agregarAlCarrito(id) {
+    const producto = state.productos.find((p) => String(p.id) === String(id));
+    if (!producto) return;
+    const existente = state.carrito.find((i) => i.id === producto.id);
+    if (existente) {
+      existente.cantidad += 1;
+    } else {
+      state.carrito.push({
+        id: producto.id,
+        nombre: producto.nombre,
+        precio: producto.precio,
+        imagen_url: producto.imagen_url,
+        cantidad: 1,
+      });
+    }
+    renderCarrito();
+    abrirCarrito();
+  }
+
+  function cambiarCantidad(id, delta) {
+    const item = state.carrito.find((i) => i.id === id);
+    if (!item) return;
+    item.cantidad += delta;
+    if (item.cantidad <= 0) {
+      state.carrito = state.carrito.filter((i) => i.id !== id);
+    }
+    renderCarrito();
+  }
+
+  function filaCarrito(item) {
+    const imagen = item.imagen_url
+      ? `<img src="${escapeHtml(item.imagen_url)}" class="w-16 h-16 object-cover rounded-lg border border-ink/10" alt="${escapeHtml(item.nombre)}" />`
+      : `<div class="w-16 h-16 rounded-lg bg-blush-100 flex items-center justify-center text-blush-600 border border-ink/10">
+           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 4h6l1 3h3l-1 15H6L5 7h3z"/></svg>
+         </div>`;
+
+    return `
+      <div class="flex gap-3 items-center">
+        ${imagen}
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">${escapeHtml(item.nombre)}</p>
+          <p class="text-xs text-ink/60">${fmt(item.precio)}</p>
+          <div class="flex items-center gap-2 mt-1">
+            <button data-qty-id="${item.id}" data-delta="-1" class="w-6 h-6 rounded-full border border-ink/20 text-sm hover:border-ink">−</button>
+            <span class="text-sm w-4 text-center">${item.cantidad}</span>
+            <button data-qty-id="${item.id}" data-delta="1" class="w-6 h-6 rounded-full border border-ink/20 text-sm hover:border-ink">+</button>
+          </div>
+        </div>
+        <p class="text-sm font-semibold">${fmt(item.precio * item.cantidad)}</p>
+      </div>`;
+  }
+
+  function renderCarrito() {
+    const cartItems = document.getElementById("cart-items");
+    const emptyMsg = document.getElementById("cart-empty-msg");
+    const cartCount = document.getElementById("cart-count");
+    const cartTotal = document.getElementById("cart-total");
+
+    cartItems.innerHTML = state.carrito.map(filaCarrito).join("");
+    emptyMsg.classList.toggle("hidden", state.carrito.length > 0);
+
+    const totalCantidad = state.carrito.reduce((acc, i) => acc + i.cantidad, 0);
+    cartCount.textContent = totalCantidad;
+    cartCount.classList.toggle("hidden", totalCantidad === 0);
+
+    const total = state.carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
+    cartTotal.textContent = fmt(total);
+
+    cartItems.querySelectorAll("[data-qty-id]").forEach((btn) => {
+      btn.addEventListener("click", () =>
+        cambiarCantidad(btn.getAttribute("data-qty-id"), Number(btn.getAttribute("data-delta")))
+      );
+    });
+  }
+
+  function construirResumenPedido() {
+    const nota = document.getElementById("cart-note").value.trim();
+    const total = state.carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
+
+    const lineas = state.carrito.map(
+      (i) => `• ${i.nombre} x${i.cantidad} — ${fmt(i.precio * i.cantidad)}`
+    );
+
+    let texto = `Pedido HEAVEN DIVISION\n\n${lineas.join("\n")}\n\nTotal: ${fmt(total)}`;
+    if (nota) texto += `\n\nNota extra: ${nota}`;
+    return texto;
+  }
+
+  document.getElementById("checkout-whatsapp").addEventListener("click", () => {
+    if (state.carrito.length === 0) return;
+    const texto = construirResumenPedido();
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`;
+    window.open(url, "_blank");
+  });
+
+  document.getElementById("checkout-instagram").addEventListener("click", async () => {
+    if (state.carrito.length === 0) return;
+    const texto = construirResumenPedido();
+    try {
+      await navigator.clipboard.writeText(texto);
+    } catch (err) {
+      console.warn("No se pudo copiar automáticamente al portapapeles:", err);
+    }
+    window.open(INSTAGRAM_PROFILE, "_blank");
+  });
+
+  // ---------------------------------------------------------
+  // 9. PANEL DE ADMINISTRADOR
+  // ---------------------------------------------------------
+  if (isAdminView) {
+    const loginScreen = document.getElementById("admin-login");
+    const dashboard = document.getElementById("admin-dashboard");
+
+    function mostrarDashboard() {
+      loginScreen.classList.add("hidden");
+      dashboard.classList.remove("hidden");
+    }
+
+    if (sessionStorage.getItem("hd_admin_auth") === "true") {
+      mostrarDashboard();
+    }
+
+    document.getElementById("admin-login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const valor = document.getElementById("admin-password").value;
+      if (valor === ADMIN_PASSWORD) {
+        sessionStorage.setItem("hd_admin_auth", "true");
+        mostrarDashboard();
+      } else {
+        document.getElementById("admin-login-error").classList.remove("hidden");
+      }
     });
 
-
-    /* =========================
-       ANIMACION PRODUCTOS
-    ========================= */
-
-    const observador = new IntersectionObserver(
-        function(entradas) {
-
-            entradas.forEach(function(entrada) {
-
-                if (entrada.isIntersecting) {
-
-                    entrada.target.classList.add("visible");
-
-                    observador.unobserve(entrada.target);
-
-                }
-
-            });
-
-        },
-        {
-            threshold: .12
-        }
-    );
-
-    productos.forEach(function(producto) {
-
-        observador.observe(producto);
-
+    document.getElementById("admin-logout").addEventListener("click", () => {
+      sessionStorage.removeItem("hd_admin_auth");
+      window.location.href = "index.html";
     });
 
-
-    /* =========================
-       VARIABLES PEDIDO
-    ========================= */
-
-    const modalPedido =
-        document.getElementById("modal-pedido");
-
-    const cerrarModal =
-        document.getElementById("cerrar-modal");
-
-    const tituloModal =
-        document.getElementById("titulo-modal");
-
-    const subtituloModal =
-        document.getElementById("subtitulo-modal");
-
-    const modalProducto =
-        document.getElementById("modal-producto");
-
-    const modalPrecio =
-        document.getElementById("modal-precio");
-
-    const modalDetalle =
-        document.getElementById("modal-detalle");
-
-    const pedidoTalla =
-        document.getElementById("pedido-talla");
-
-    const pedidoCantidad =
-        document.getElementById("pedido-cantidad");
-
-    const pedidoComentarios =
-        document.getElementById("pedido-comentarios");
-
-    const pedidoEstampado =
-        document.getElementById("pedido-estampado");
-
-    const datosEstampado =
-        document.getElementById("datos-estampado");
-
-    const pedidoEstampadoNombre =
-        document.getElementById("pedido-estampado-nombre");
-
-    const pedidoEstampadoNumero =
-        document.getElementById("pedido-estampado-numero");
-
-    const botonWhatsApp =
-        document.getElementById(
-            "boton-confirmar-whatsapp"
-        );
-
-    const botonInstagram =
-        document.getElementById(
-            "boton-confirmar-instagram"
-        );
-
-    const avisoInstagram =
-        document.getElementById(
-            "aviso-instagram"
-        );
-
-    let productoSeleccionado = null;
-
-
-    /* =========================
-       VARIABLES DETALLE PRODUCTO
-    ========================= */
-
-    const modalDetalleProducto =
-        document.getElementById("modal-detalle-producto");
-
-    const cerrarDetalleProductoBtn =
-        document.getElementById("cerrar-detalle-producto");
-
-    const detalleImagen =
-        document.getElementById("detalle-imagen");
-
-    const detalleNombre =
-        document.getElementById("detalle-nombre");
-
-    const detallePrecio =
-        document.getElementById("detalle-precio");
-
-    const detalleTallas =
-        document.getElementById("detalle-tallas");
-
-    const detalleTexto =
-        document.getElementById("detalle-texto");
-
-    const detalleBotonInstagram =
-        document.getElementById("detalle-btn-instagram");
-
-    const detalleBotonWhatsApp =
-        document.getElementById("detalle-btn-whatsapp");
-
-
-    /* =========================
-       ABRIR DETALLE PRODUCTO
-    ========================= */
-
-    function abrirDetalleProducto(tarjeta) {
-
-        productoSeleccionado = tarjeta;
-
-        const imagenOrigen =
-            tarjeta.querySelector(".imagen-contenedor img");
-
-        detalleImagen.src = imagenOrigen ? imagenOrigen.src : "";
-        detalleImagen.alt = tarjeta.dataset.producto;
-
-        detalleNombre.textContent =
-            tarjeta.dataset.producto;
-
-        detallePrecio.textContent =
-            "$" + tarjeta.dataset.precio + ".00";
-
-        detalleTallas.textContent =
-            tarjeta.dataset.tallas;
-
-        detalleTexto.textContent =
-            tarjeta.dataset.detalle;
-
-        modalDetalleProducto.classList.remove("oculto");
-
-        document.body.style.overflow = "hidden";
-
-
-        const contenedorImagenDetalle =
-            document.querySelector(".detalle-imagen-contenedor");
-
-        contenedorImagenDetalle.classList.remove("destello");
-
-        void contenedorImagenDetalle.offsetWidth;
-
-        contenedorImagenDetalle.classList.add("destello");
-
-    }
-
-
-    /* =========================
-       CERRAR DETALLE PRODUCTO
-    ========================= */
-
-    function cerrarDetalleProducto() {
-
-        modalDetalleProducto.classList.add("oculto");
-
-        document.body.style.overflow = "";
-
-    }
-
-    cerrarDetalleProductoBtn.addEventListener(
-        "click",
-        cerrarDetalleProducto
-    );
-
-    modalDetalleProducto.addEventListener(
-        "click",
-        function(event) {
-
-            if (event.target === modalDetalleProducto) {
-
-                cerrarDetalleProducto();
-
-            }
-
-        }
-    );
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                event.key === "Escape" &&
-                !modalDetalleProducto.classList.contains("oculto")
-            ) {
-
-                cerrarDetalleProducto();
-
-            }
-
-        }
-    );
-
-    detalleBotonInstagram.addEventListener(
-        "click",
-        function() {
-
-            cerrarDetalleProducto();
-            abrirPedido("instagram");
-
-        }
-    );
-
-    detalleBotonWhatsApp.addEventListener(
-        "click",
-        function() {
-
-            cerrarDetalleProducto();
-            abrirPedido("whatsapp");
-
-        }
-    );
-
-
-    /* =========================
-       ABRIR PEDIDO
-    ========================= */
-
-    function abrirPedido(metodo) {
-
-        const nombre =
-            productoSeleccionado.dataset.producto;
-
-        const precio =
-            productoSeleccionado.dataset.precio;
-
-        const tallas =
-            productoSeleccionado.dataset.tallas;
-
-        const detalle =
-            productoSeleccionado.dataset.detalle;
-
-
-        modalProducto.textContent = nombre;
-
-        modalPrecio.textContent =
-            "Precio: $" + precio + ".00";
-
-        modalDetalle.textContent =
-            detalle;
-
-
-        pedidoTalla.innerHTML =
-            '<option value="">Selecciona una talla</option>';
-
-        tallas.split(",").forEach(function(talla) {
-
-            const limpia = talla.trim();
-
-            const opcion =
-                document.createElement("option");
-
-            opcion.value = limpia;
-            opcion.textContent = limpia;
-
-            pedidoTalla.appendChild(opcion);
-
-        });
-
-
-        pedidoCantidad.value = "";
-        pedidoComentarios.value = "";
-
-        pedidoEstampado.checked = false;
-        pedidoEstampadoNombre.value = "";
-        pedidoEstampadoNumero.value = "";
-        datosEstampado.style.display = "none";
-
-
-        if (metodo === "whatsapp") {
-
-            tituloModal.textContent =
-                "Pedido por WhatsApp";
-
-            subtituloModal.textContent =
-                "Elige talla, cantidad y agrega cualquier comentario.";
-
-            botonWhatsApp.style.display = "block";
-            botonInstagram.style.display = "none";
-            avisoInstagram.style.display = "none";
-
-        } else {
-
-            tituloModal.textContent =
-                "Pedido por Instagram";
-
-            subtituloModal.textContent =
-                "Completa tu pedido y copiaremos el mensaje.";
-
-            botonWhatsApp.style.display = "none";
-            botonInstagram.style.display = "block";
-            avisoInstagram.style.display = "block";
-
-        }
-
-
-        modalPedido.classList.remove("oculto");
-
-        document.body.style.overflow = "hidden";
-
-
-        setTimeout(function() {
-
-            pedidoTalla.focus();
-
-        },100);
-
-    }
-
-
-    /* =========================
-       CERRAR MODAL
-    ========================= */
-
-    function cerrarFormulario() {
-
-        modalPedido.classList.add("oculto");
-
-        document.body.style.overflow = "";
-
-        productoSeleccionado = null;
-
-    }
-
-    pedidoEstampado.addEventListener(
-        "change",
-        function() {
-
-            datosEstampado.style.display =
-                pedidoEstampado.checked ? "grid" : "none";
-
-            if (!pedidoEstampado.checked) {
-
-                pedidoEstampadoNombre.value = "";
-                pedidoEstampadoNumero.value = "";
-
-            }
-
-        }
-    );
-
-
-    cerrarModal.addEventListener(
-        "click",
-        cerrarFormulario
-    );
-
-
-    modalPedido.addEventListener(
-        "click",
-        function(event) {
-
-            if (event.target === modalPedido) {
-
-                cerrarFormulario();
-
-            }
-
-        }
-    );
-
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                event.key === "Escape" &&
-                !modalPedido.classList.contains("oculto")
-            ) {
-
-                cerrarFormulario();
-
-            }
-
-        }
-    );
-
-
-    /* =========================
-       CREAR MENSAJE
-    ========================= */
-
-    function crearMensajePedido() {
-
-        if (!productoSeleccionado) {
-            return "";
-        }
-
-        const nombre =
-            productoSeleccionado.dataset.producto;
-
-        const precio =
-            productoSeleccionado.dataset.precio;
-
-        const detalle =
-            productoSeleccionado.dataset.detalle;
-
-        const talla =
-            pedidoTalla.value;
-
-        const cantidad =
-            pedidoCantidad.value.trim();
-
-        const comentarios =
-            pedidoComentarios.value.trim();
-
-        const quiereEstampado =
-            pedidoEstampado.checked;
-
-        const estampadoNombre =
-            pedidoEstampadoNombre.value.trim();
-
-        const estampadoNumero =
-            pedidoEstampadoNumero.value.trim();
-
-
-        if (!talla) {
-
-            alert("Por favor selecciona una talla.");
-
-            pedidoTalla.focus();
-
-            return null;
-
-        }
-
-
-        if (!cantidad) {
-
-            alert("Por favor escribe la cantidad.");
-
-            pedidoCantidad.focus();
-
-            return null;
-
-        }
-
-
-        if (
-            Number(cantidad) < 1 ||
-            !Number.isInteger(Number(cantidad))
-        ) {
-
-            alert(
-                "La cantidad debe ser un número entero mayor a 0."
-            );
-
-            pedidoCantidad.focus();
-
-            return null;
-
-        }
-
-
-        if (quiereEstampado && !estampadoNombre) {
-
-            alert(
-                "Por favor escribe el nombre para el estampado."
-            );
-
-            pedidoEstampadoNombre.focus();
-
-            return null;
-
-        }
-
-
-        if (quiereEstampado && !estampadoNumero) {
-
-            alert(
-                "Por favor escribe el número para el estampado."
-            );
-
-            pedidoEstampadoNumero.focus();
-
-            return null;
-
-        }
-
-
-        const precioEstampado = Number(CONFIG.estampado_precio ?? 60);
-
-        const estampadoLinea = quiereEstampado
-            ? `🖨️ Estampado nombre y número (+$${precioEstampado.toFixed(2)}): ${estampadoNombre} #${estampadoNumero}\n`
-            : "";
-
-        const plantilla = CONFIG.mensaje_plantilla || CONFIG_DEFAULT.mensaje_plantilla;
-
-        const mensaje = plantilla
-            .replace(/{producto}/g, nombre)
-            .replace(/{precio}/g, `$${precio}.00`)
-            .replace(/{talla}/g, talla)
-            .replace(/{cantidad}/g, cantidad)
-            .replace(/{estampado_linea}/g, estampadoLinea)
-            .replace(/{detalle}/g, detalle)
-            .replace(/{comentarios}/g, comentarios || "Ninguno");
-
-        return mensaje;
-
-    }
-
-
-    /* =========================
-       WHATSAPP
-    ========================= */
-
-    botonWhatsApp.addEventListener(
-        "click",
-        function() {
-
-            const mensaje =
-                crearMensajePedido();
-
-            if (!mensaje) {
-                return;
-            }
-
-            const numero =
-                CONFIG.whatsapp_numero || CONFIG_DEFAULT.whatsapp_numero;
-
-            const url =
-                "https://wa.me/" +
-                numero +
-                "?text=" +
-                encodeURIComponent(mensaje);
-
-            window.open(
-                url,
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-            cerrarFormulario();
-
-        }
-    );
-
-
-    /* =========================
-       INSTAGRAM
-    ========================= */
-
-    botonInstagram.addEventListener(
-        "click",
-        async function() {
-
-            const mensaje =
-                crearMensajePedido();
-
-            if (!mensaje) {
-                return;
-            }
-
-
-            try {
-
-                await navigator.clipboard.writeText(
-                    mensaje
-                );
-
-            } catch(error) {
-
-                const textarea =
-                    document.createElement("textarea");
-
-                textarea.value = mensaje;
-
-                textarea.style.position = "fixed";
-                textarea.style.opacity = "0";
-
-                document.body.appendChild(
-                    textarea
-                );
-
-                textarea.focus();
-                textarea.select();
-
-                try {
-                    document.execCommand("copy");
-                } catch(e) {}
-
-                document.body.removeChild(
-                    textarea
-                );
-
-            }
-
-
-            const aviso =
-                document.getElementById(
-                    "mensaje-copiado"
-                );
-
-            aviso.classList.add("mostrar");
-
-
-            setTimeout(function() {
-
-                aviso.classList.remove("mostrar");
-
-            },3500);
-
-
-            setTimeout(function() {
-
-                window.open(
-                    CONFIG.instagram_url || CONFIG_DEFAULT.instagram_url,
-                    "_blank",
-                    "noopener,noreferrer"
-                );
-
-                cerrarFormulario();
-
-            },500);
-
-        }
-    );
-
-
-    /* =========================
-       POPUP PROMOCION
-    ========================= */
-
-    const popup =
-        document.getElementById(
-            "popup-promocion"
-        );
-
-    const cerrarPopup =
-        document.getElementById(
-            "cerrar-popup"
-        );
-
-
-    function cerrarPrimerPopup() {
-
-        popup.classList.add("oculto");
-
-        if (CONFIG.popup2_activo !== false) {
-            popup2.classList.remove("oculto");
-        }
-
-    }
-
-
-    cerrarPopup.addEventListener(
-        "click",
-        cerrarPrimerPopup
-    );
-
-
-    popup.addEventListener(
-        "click",
-        function(event) {
-
-            if (event.target === popup) {
-
-                cerrarPrimerPopup();
-
-            }
-
-        }
-    );
-
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                event.key === "Escape" &&
-                !popup.classList.contains("oculto")
-            ) {
-
-                cerrarPrimerPopup();
-
-            }
-
-        }
-    );
-
-
-    /* =========================
-       POPUP PROMOCION 2 (IMAGEN)
-    ========================= */
-
-    const popup2 =
-        document.getElementById(
-            "popup-promocion-2"
-        );
-
-    const cerrarPopup2 =
-        document.getElementById(
-            "cerrar-popup-2"
-        );
-
-
-    cerrarPopup2.addEventListener(
-        "click",
-        function() {
-
-            popup2.classList.add("oculto");
-
-        }
-    );
-
-
-    popup2.addEventListener(
-        "click",
-        function(event) {
-
-            if (event.target === popup2) {
-
-                popup2.classList.add("oculto");
-
-            }
-
-        }
-    );
-
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                event.key === "Escape" &&
-                !popup2.classList.contains("oculto")
-            ) {
-
-                popup2.classList.add("oculto");
-
-            }
-
-        }
-    );
-
-</script>
-
-
-
-
-<!-- LÓGICA DEL CATÁLOGO Y ADMINISTRADOR -->
-<script>
-(function () {
-    const SUPABASE_URL = "https://ibucxeeascwhiojipzsz.supabase.co";
-    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_vbj7JhKMl5LcdXiovlxndw_ANfm5nZ1";
-    const ADMIN_EMAIL = "erickorgz07@gmail.com";
-
-    const sb = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
-
-    const catalogo = document.getElementById("catalogo");
-    const buscador = document.getElementById("buscador");
-    const adminBoton = document.getElementById("admin-boton");
-    const loginOverlay = document.getElementById("admin-login");
-    const panelOverlay = document.getElementById("admin-panel");
-    const loginCerrar = document.getElementById("admin-login-cerrar");
-    const panelCerrar = document.getElementById("admin-panel-cerrar");
-    const loginBtn = document.getElementById("admin-login-btn");
-    const loginPassword = document.getElementById("admin-password");
-    const loginEstado = document.getElementById("admin-login-estado");
-    const adminEstado = document.getElementById("admin-estado");
-    const adminLista = document.getElementById("admin-lista");
-    const guardarBtn = document.getElementById("admin-guardar");
-    const cancelarBtn = document.getElementById("admin-cancelar");
-    const cerrarSesionBtn = document.getElementById("admin-cerrar-sesion");
-
-    const fNombre = document.getElementById("admin-nombre");
-    const fPrecio = document.getElementById("admin-precio");
-    const fTallas = document.getElementById("admin-tallas");
-    const fEtiqueta = document.getElementById("admin-etiqueta");
-    const fOrden = document.getElementById("admin-orden");
-    const fDetalle = document.getElementById("admin-detalle");
-    const fImagen = document.getElementById("admin-imagen");
-    const fActivo = document.getElementById("admin-activo");
-    const fDestacado = document.getElementById("admin-destacado");
-
-    let productosDB = [];
-    let productoEditando = null;
-
-    // ---- Contenido del sitio (configuración editable) ----
-    const tabBtnProductos = document.getElementById("tab-btn-productos");
-    const tabBtnContenido = document.getElementById("tab-btn-contenido");
-    const vistaProductos = document.getElementById("admin-vista-productos");
-    const vistaContenido = document.getElementById("admin-vista-contenido");
-    const cerrarSesionBtn2 = document.getElementById("admin-cerrar-sesion-2");
-    const cfgEstado = document.getElementById("cfg-estado");
-    const cfgGuardarBtn = document.getElementById("cfg-guardar");
-
-    const CONFIG_DEFAULT = {
-        topbar: ["🖤 HEAVEN DIVISIÓN", "🔥 Piezas exclusivas", "📩 Pedidos por WhatsApp e Instagram", "🎯 Streetwear auténtico"],
-        logo_url: "https://placehold.co/300x300/f4c6dd/1a1a1a?text=TU+LOGO",
-        titulo_header: "HEAVEN DIVISIÓN",
-        subtitulo_header: "Streetwear Camo Collection",
-        hero_titulo: "Actitud, camuflaje y estilo urbano",
-        hero_texto: "Prendas streetwear con diseño exclusivo, camuflado rosa y una identidad que no pasa desapercibida.",
-        hero_badges: ["🖤 Streetwear auténtico", "🎯 Piezas exclusivas", "🔥 Edición limitada", "📱 Pedidos por WhatsApp"],
-        hero_card_titulo: "¿Por qué elegir HEAVEN DIVISIÓN?",
-        hero_card_items: ["✔ Atención rápida y directa", "✔ Diseños que destacan", "✔ Calidad premium", "✔ Piezas exclusivas y limitadas"],
-        buscador_placeholder: "Busca por nombre o categoría...",
-        catalogo_titulo: "Catálogo",
-        catalogo_subtitulo: "Todas nuestras piezas disponibles. Busca por nombre o categoría.",
-        whatsapp_numero: "525523389986",
-        instagram_url: "https://www.instagram.com/heavendivision/",
-        estampado_precio: 60,
-        mensaje_plantilla: "Hola HEAVEN DIVISIÓN 👋\n\nQuiero hacer un pedido:\n\n🛍️ Producto: {producto}\n💰 Precio: {precio}\n📏 Talla: {talla}\n🔢 Cantidad: {cantidad}\n{estampado_linea}📝 Detalle: {detalle}\n💬 Comentarios adicionales: {comentarios}\n\n¿Me pueden confirmar disponibilidad?",
-        beneficios_titulo: "¿Por qué comprar aquí?",
-        beneficios: [
-            {titulo: "Calidad premium", texto: "Piezas seleccionadas con gran presencia visual y acabados atractivos."},
-            {titulo: "Streetwear auténtico", texto: "Diseños camuflados con identidad urbana, pensados para destacar."},
-            {titulo: "Atención directa", texto: "Comunicación rápida para resolver dudas, tallas y disponibilidad."},
-            {titulo: "Piezas exclusivas", texto: "Modelos limitados que resaltan por su diseño dentro del catálogo."}
-        ],
-        testimonios_titulo: "Lo que dicen nuestros clientes",
-        resenas: [
-            {nombre: "Cliente HEAVEN", texto: "Muy buena calidad y la atención fue súper rápida."},
-            {nombre: "Cliente satisfecho", texto: "La prenda llegó excelente, se ve todavía mejor en persona."},
-            {nombre: "Comprador frecuente", texto: "Atención rápida y modelos diferentes a los de otras tiendas."}
-        ],
-        popup1_imagen: "https://placehold.co/800x1000/e588b8/ffffff?text=HEAVEN+DIVISI%C3%93N",
-        popup1_activo: false,
-        popup2_imagen: "https://placehold.co/600x750/1a1a1a/ffffff?text=HEAVEN+DIVISI%C3%93N",
-        popup2_activo: false,
-        footer_descripcion: "Streetwear urbano con actitud, calidad y diseño exclusivo.",
-        footer_horario: ["Lunes a sábado", "Sujeto a disponibilidad"],
-        footer_copy: "© 2026 HEAVEN DIVISIÓN · Todos los derechos reservados."
+    document.getElementById("topbar-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nuevoTexto = document.getElementById("topbar-input").value.trim();
+      const { error } = await supabaseClient
+        .from("configuracion_tienda")
+        .update({ top_bar_texto: nuevoTexto })
+        .eq("id", 1);
+      if (!error) {
+        const msg = document.getElementById("topbar-saved-msg");
+        msg.classList.remove("hidden");
+        setTimeout(() => msg.classList.add("hidden"), 2000);
+      }
+    });
+
+    document.getElementById("images-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const logo_url = document.getElementById("logo-url-input").value.trim();
+      const hero_imagen_url = document.getElementById("hero-url-input").value.trim();
+      const { error } = await supabaseClient
+        .from("configuracion_tienda")
+        .update({ logo_url, hero_imagen_url })
+        .eq("id", 1);
+      if (!error) {
+        const msg = document.getElementById("images-saved-msg");
+        msg.classList.remove("hidden");
+        setTimeout(() => msg.classList.add("hidden"), 2000);
+      } else {
+        alert("Ocurrió un error al guardar las imágenes: " + error.message);
+      }
+    });
+
+    document.getElementById("product-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nuevoProducto = {
+        nombre: document.getElementById("product-nombre").value.trim(),
+        precio: Number(document.getElementById("product-precio").value),
+        descripcion: document.getElementById("product-descripcion").value.trim(),
+        imagen_url: document.getElementById("product-imagen").value.trim(),
+        categoria: document.getElementById("product-categoria").value,
+      };
+      const { error } = await supabaseClient.from("productos").insert(nuevoProducto);
+      if (!error) {
+        e.target.reset();
+      } else {
+        alert("Ocurrió un error al publicar la prenda: " + error.message);
+      }
+    });
+
+    window.eliminarProducto = async (id) => {
+      if (!confirm("¿Eliminar esta prenda?")) return;
+      await supabaseClient.from("productos").delete().eq("id", id);
     };
-
-    let CONFIG = Object.assign({}, CONFIG_DEFAULT);
-
-    function abrir(overlay) {
-        overlay.classList.add("visible");
-        overlay.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
-    }
-
-    function cerrar(overlay) {
-        overlay.classList.remove("visible");
-        overlay.setAttribute("aria-hidden", "true");
-        if (!loginOverlay.classList.contains("visible") && !panelOverlay.classList.contains("visible")) {
-            document.body.style.overflow = "";
-        }
-    }
-
-    function normalizar(texto) {
-        return String(texto || "")
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
-    }
-
-    function esc(texto) {
-        return String(texto ?? "")
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/\"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
-
-    function crearTarjeta(p) {
-        const tarjeta = document.createElement("div");
-        tarjeta.className = "tarjeta-producto visible";
-        tarjeta.dataset.producto = p.nombre;
-        tarjeta.dataset.precio = Number(p.precio).toFixed(2).replace(/\.00$/, "");
-        tarjeta.dataset.tallas = (p.tallas || []).join(", ");
-        tarjeta.dataset.detalle = p.detalle || "";
-        tarjeta.dataset.productoId = p.id;
-        tarjeta.onclick = function () {
-            abrirDetalleProducto(tarjeta);
-        };
-
-        tarjeta.innerHTML = `
-            ${p.etiqueta ? `<span class="badge-producto">${esc(p.etiqueta)}</span>` : ""}
-            <div class="imagen-contenedor">
-                <img src="${esc(p.imagen_url)}" alt="${esc(p.nombre)}" loading="lazy">
-            </div>
-            <div class="overlay-galeria"></div>
-            <div class="contenido-galeria">
-                <h3>${esc(p.nombre)}</h3>
-                <p class="precio">$${Number(p.precio).toFixed(2)}</p>
-                <div class="tallas-contenedor">
-                    Tallas:
-                    <span>${esc((p.tallas || []).join(", "))}</span>
-                </div>
-                <p class="detalle-extra">${esc(p.detalle || "")}</p>
-            </div>
-        `;
-        return tarjeta;
-    }
-
-    function renderCatalogo() {
-        const antiguas = catalogo.querySelectorAll(".tarjeta-producto");
-        antiguas.forEach(el => el.remove());
-
-        const texto = normalizar(buscador ? buscador.value : "");
-        let encontrados = 0;
-
-        productosDB.forEach(p => {
-            const tarjeta = crearTarjeta(p);
-            const contenido = normalizar(`${p.nombre} ${p.etiqueta} ${(p.tallas || []).join(" ")} ${p.detalle}`);
-            if (!texto || contenido.includes(texto)) {
-                tarjeta.style.display = "";
-                encontrados++;
-            } else {
-                tarjeta.style.display = "none";
-            }
-            catalogo.appendChild(tarjeta);
-        });
-
-        const sinResultados = document.getElementById("sin-resultados");
-        if (sinResultados) {
-            sinResultados.style.display = texto && encontrados === 0 ? "block" : "none";
-        }
-    }
-
-    async function cargarProductos() {
-        const { data, error } = await sb
-            .from("productos_heaven")
-            .select("*")
-            .order("orden", { ascending: true })
-            .order("id", { ascending: true });
-
-        if (error) {
-            console.error(error);
-            const sinResultados = document.getElementById("sin-resultados");
-            if (sinResultados) {
-                sinResultados.textContent = "No se pudo cargar el catálogo. Revisa la configuración de Supabase.";
-                sinResultados.style.display = "block";
-            }
-            return;
-        }
-
-        productosDB = data || [];
-        renderCatalogo();
-        if (esAdmin()) renderListaAdmin();
-    }
-
-    function esAdmin() {
-        return window.__heavenAdmin === true;
-    }
-
-    function mostrarBotonAdmin() {
-        adminBoton.style.display = esAdmin() ? "block" : "none";
-    }
-
-    async function comprobarSesion() {
-        const { data } = await sb.auth.getSession();
-        const session = data && data.session;
-        const email = session && session.user && session.user.email;
-        window.__heavenAdmin = !!session && email && email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
-        mostrarBotonAdmin();
-        if (!window.__heavenAdmin && session) {
-            await sb.auth.signOut();
-        }
-        if (window.__heavenAdmin) await cargarProductos();
-    }
-
-    function limpiarFormulario() {
-        productoEditando = null;
-        fNombre.value = "";
-        fPrecio.value = "";
-        fTallas.value = "";
-        fEtiqueta.value = "";
-        fOrden.value = "";
-        fDetalle.value = "";
-        fImagen.value = "";
-        fActivo.checked = true;
-        fDestacado.checked = false;
-        guardarBtn.textContent = "➕ Publicar producto";
-        cancelarBtn.style.display = "none";
-    }
-
-    function editarProducto(p) {
-        productoEditando = p;
-        fNombre.value = p.nombre || "";
-        fPrecio.value = p.precio ?? "";
-        fTallas.value = (p.tallas || []).join(", ");
-        fEtiqueta.value = p.etiqueta || "";
-        fOrden.value = p.orden ?? "";
-        fDetalle.value = p.detalle || "";
-        fImagen.value = "";
-        fActivo.checked = !!p.activo;
-        fDestacado.checked = !!p.destacado;
-        guardarBtn.textContent = "💾 Guardar cambios";
-        cancelarBtn.style.display = "inline-block";
-        panelOverlay.querySelector(".admin-caja").scrollTo({top:0, behavior:"smooth"});
-    }
-
-    async function subirImagen(file, productoId, carpeta) {
-        if (!file) return null;
-        const extension = (file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "");
-        const nombre = `${productoId}-${Date.now()}-${crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2)}.${extension}`;
-        const ruta = `${carpeta || "heaven-catalogo"}/${nombre}`;
-
-        const { error } = await sb.storage
-            .from("productos_heaven")
-            .upload(ruta, file, {
-                cacheControl: "3600",
-                upsert: false,
-                contentType: file.type || "image/jpeg"
-            });
-
-        if (error) throw error;
-
-        const { data } = sb.storage.from("productos").getPublicUrl(ruta);
-        return data.publicUrl;
-    }
-
-    /* =========================
-       CONTENIDO DEL SITIO (CONFIGURACIÓN)
-    ========================= */
-
-    function lineasDe(texto) {
-        return String(texto || "")
-            .split("\n")
-            .map(x => x.trim())
-            .filter(Boolean);
-    }
-
-    function parsearParClave(texto, claveA, claveB) {
-        return lineasDe(texto).map(linea => {
-            const partes = linea.split("|");
-            const a = (partes[0] || "").trim();
-            const b = (partes.slice(1).join("|") || "").trim();
-            const obj = {};
-            obj[claveA] = a;
-            obj[claveB] = b;
-            return obj;
-        }).filter(obj => obj[claveA]);
-    }
-
-    function aplicarConfiguracion() {
-        const c = CONFIG;
-
-        const topBar = document.getElementById("top-bar-lista");
-        if (topBar) {
-            topBar.innerHTML = (c.topbar || []).map(t => `<span>${esc(t)}</span>`).join("");
-        }
-
-        const logoImg = document.getElementById("logo-tienda-img");
-        if (logoImg && c.logo_url) logoImg.src = c.logo_url;
-
-        const headerTitulo = document.getElementById("header-titulo");
-        if (headerTitulo) headerTitulo.textContent = c.titulo_header || "";
-
-        const headerSubtitulo = document.getElementById("header-subtitulo");
-        if (headerSubtitulo) headerSubtitulo.textContent = c.subtitulo_header || "";
-
-        const heroTitulo = document.getElementById("hero-titulo");
-        if (heroTitulo) heroTitulo.textContent = c.hero_titulo || "";
-
-        const heroTexto = document.getElementById("hero-texto");
-        if (heroTexto) heroTexto.textContent = c.hero_texto || "";
-
-        const heroBadges = document.getElementById("hero-badges-lista");
-        if (heroBadges) {
-            heroBadges.innerHTML = (c.hero_badges || []).map(b => `<span class="hero-badge">${esc(b)}</span>`).join("");
-        }
-
-        const heroCardTitulo = document.getElementById("hero-card-titulo");
-        if (heroCardTitulo) heroCardTitulo.textContent = c.hero_card_titulo || "";
-
-        const heroCardLista = document.getElementById("hero-card-lista");
-        if (heroCardLista) {
-            heroCardLista.innerHTML = (c.hero_card_items || []).map(i => `<li>${esc(i)}</li>`).join("");
-        }
-
-        if (buscador) buscador.placeholder = c.buscador_placeholder || "";
-
-        const catalogoTitulo = document.getElementById("catalogo-titulo");
-        if (catalogoTitulo) catalogoTitulo.textContent = c.catalogo_titulo || "";
-
-        const catalogoSubtitulo = document.getElementById("catalogo-subtitulo");
-        if (catalogoSubtitulo) catalogoSubtitulo.textContent = c.catalogo_subtitulo || "";
-
-        const beneficiosTitulo = document.getElementById("beneficios-titulo");
-        if (beneficiosTitulo) beneficiosTitulo.textContent = c.beneficios_titulo || "";
-
-        const beneficiosLista = document.getElementById("beneficios-lista");
-        if (beneficiosLista) {
-            beneficiosLista.innerHTML = (c.beneficios || []).map(b => `
-                <div class="beneficio-card">
-                    <h3>${esc(b.titulo)}</h3>
-                    <p>${esc(b.texto)}</p>
-                </div>
-            `).join("");
-        }
-
-        const testimoniosTitulo = document.getElementById("testimonios-titulo");
-        if (testimoniosTitulo) testimoniosTitulo.textContent = c.testimonios_titulo || "";
-
-        const testimoniosLista = document.getElementById("testimonios-lista");
-        if (testimoniosLista) {
-            testimoniosLista.innerHTML = (c.resenas || []).map(r => `
-                <div class="testimonio">
-                    <p>"${esc(r.texto)}"</p>
-                    <strong>— ${esc(r.nombre)}</strong>
-                </div>
-            `).join("");
-        }
-
-        const footerDescripcion = document.getElementById("footer-descripcion");
-        if (footerDescripcion) footerDescripcion.textContent = c.footer_descripcion || "";
-
-        const footerHorarioLista = document.getElementById("footer-horario-lista");
-        if (footerHorarioLista) {
-            footerHorarioLista.innerHTML = (c.footer_horario || []).map(l => `<p>${esc(l)}</p>`).join("");
-        }
-
-        const footerCopy = document.getElementById("footer-copy-texto");
-        if (footerCopy) footerCopy.innerHTML = esc(c.footer_copy || "").replace(/\n/g, "<br>");
-
-        const footerInstagram = document.getElementById("footer-instagram-link");
-        if (footerInstagram && c.instagram_url) footerInstagram.href = c.instagram_url;
-
-        const footerWhatsapp = document.getElementById("footer-whatsapp-link");
-        if (footerWhatsapp && c.whatsapp_numero) {
-            footerWhatsapp.href = `https://wa.me/${c.whatsapp_numero}`;
-            footerWhatsapp.textContent = `WhatsApp: ${c.whatsapp_numero}`;
-        }
-
-        const estampadoPrecioTexto = document.getElementById("estampado-precio-texto");
-        if (estampadoPrecioTexto) {
-            estampadoPrecioTexto.textContent = `+ $${Number(c.estampado_precio ?? 60).toFixed(2)} costo extra`;
-        }
-
-        const popup1Img = document.getElementById("popup1-imagen");
-        if (popup1Img && c.popup1_imagen) popup1Img.src = c.popup1_imagen;
-        const popup1El = document.getElementById("popup-promocion");
-        if (popup1El && c.popup1_activo === false) popup1El.classList.add("oculto");
-
-        const popup2Img = document.getElementById("popup2-imagen");
-        if (popup2Img && c.popup2_imagen) popup2Img.src = c.popup2_imagen;
-    }
-
-    function rellenarFormularioConfig() {
-        const c = CONFIG;
-        const set = (id, valor) => { const el = document.getElementById(id); if (el) el.value = valor ?? ""; };
-        const setChecked = (id, valor) => { const el = document.getElementById(id); if (el) el.checked = !!valor; };
-
-        set("cfg-titulo-header", c.titulo_header);
-        set("cfg-subtitulo-header", c.subtitulo_header);
-        set("cfg-topbar", (c.topbar || []).join("\n"));
-
-        set("cfg-hero-titulo", c.hero_titulo);
-        set("cfg-hero-texto", c.hero_texto);
-        set("cfg-hero-badges", (c.hero_badges || []).join("\n"));
-        set("cfg-hero-card-titulo", c.hero_card_titulo);
-        set("cfg-hero-card-items", (c.hero_card_items || []).join("\n"));
-
-        set("cfg-buscador-placeholder", c.buscador_placeholder);
-        set("cfg-catalogo-titulo", c.catalogo_titulo);
-        set("cfg-catalogo-subtitulo", c.catalogo_subtitulo);
-
-        set("cfg-whatsapp", c.whatsapp_numero);
-        set("cfg-instagram", c.instagram_url);
-
-        set("cfg-estampado-precio", c.estampado_precio);
-        set("cfg-mensaje-plantilla", c.mensaje_plantilla);
-
-        set("cfg-beneficios-titulo", c.beneficios_titulo);
-        set("cfg-beneficios", (c.beneficios || []).map(b => `${b.titulo} | ${b.texto}`).join("\n"));
-
-        set("cfg-testimonios-titulo", c.testimonios_titulo);
-        set("cfg-resenas", (c.resenas || []).map(r => `${r.nombre} | ${r.texto}`).join("\n"));
-
-        setChecked("cfg-popup1-activo", c.popup1_activo);
-        setChecked("cfg-popup2-activo", c.popup2_activo);
-
-        set("cfg-footer-descripcion", c.footer_descripcion);
-        set("cfg-footer-horario", (c.footer_horario || []).join("\n"));
-        set("cfg-footer-copy", c.footer_copy);
-    }
-
-    async function cargarConfiguracion() {
-        try {
-            const { data, error } = await sb
-                .from("configuracion_heaven")
-                .select("datos")
-                .eq("id", 1)
-                .maybeSingle();
-
-            if (error) throw error;
-
-            CONFIG = Object.assign({}, CONFIG_DEFAULT, (data && data.datos) || {});
-        } catch (error) {
-            console.error("No se pudo cargar la configuración del sitio:", error);
-            CONFIG = Object.assign({}, CONFIG_DEFAULT);
-        }
-
-        aplicarConfiguracion();
-        if (esAdmin()) rellenarFormularioConfig();
-    }
-
-    async function guardarConfiguracion() {
-        if (!esAdmin()) {
-            cfgEstado.textContent = "Sesión de administrador no válida.";
-            return;
-        }
-
-        cfgGuardarBtn.disabled = true;
-        cfgEstado.textContent = "Guardando cambios...";
-
-        try {
-            const nuevo = Object.assign({}, CONFIG);
-
-            nuevo.titulo_header = document.getElementById("cfg-titulo-header").value.trim();
-            nuevo.subtitulo_header = document.getElementById("cfg-subtitulo-header").value.trim();
-            nuevo.topbar = lineasDe(document.getElementById("cfg-topbar").value);
-
-            nuevo.hero_titulo = document.getElementById("cfg-hero-titulo").value.trim();
-            nuevo.hero_texto = document.getElementById("cfg-hero-texto").value.trim();
-            nuevo.hero_badges = lineasDe(document.getElementById("cfg-hero-badges").value);
-            nuevo.hero_card_titulo = document.getElementById("cfg-hero-card-titulo").value.trim();
-            nuevo.hero_card_items = lineasDe(document.getElementById("cfg-hero-card-items").value);
-
-            nuevo.buscador_placeholder = document.getElementById("cfg-buscador-placeholder").value.trim();
-            nuevo.catalogo_titulo = document.getElementById("cfg-catalogo-titulo").value.trim();
-            nuevo.catalogo_subtitulo = document.getElementById("cfg-catalogo-subtitulo").value.trim();
-
-            nuevo.whatsapp_numero = document.getElementById("cfg-whatsapp").value.trim().replace(/[^0-9]/g, "");
-            nuevo.instagram_url = document.getElementById("cfg-instagram").value.trim();
-
-            const precioEstampado = Number(document.getElementById("cfg-estampado-precio").value);
-            nuevo.estampado_precio = Number.isFinite(precioEstampado) ? precioEstampado : 60;
-            nuevo.mensaje_plantilla = document.getElementById("cfg-mensaje-plantilla").value;
-
-            nuevo.beneficios_titulo = document.getElementById("cfg-beneficios-titulo").value.trim();
-            nuevo.beneficios = parsearParClave(document.getElementById("cfg-beneficios").value, "titulo", "texto");
-
-            nuevo.testimonios_titulo = document.getElementById("cfg-testimonios-titulo").value.trim();
-            nuevo.resenas = parsearParClave(document.getElementById("cfg-resenas").value, "nombre", "texto");
-
-            nuevo.popup1_activo = document.getElementById("cfg-popup1-activo").checked;
-            nuevo.popup2_activo = document.getElementById("cfg-popup2-activo").checked;
-
-            nuevo.footer_descripcion = document.getElementById("cfg-footer-descripcion").value.trim();
-            nuevo.footer_horario = lineasDe(document.getElementById("cfg-footer-horario").value);
-            nuevo.footer_copy = document.getElementById("cfg-footer-copy").value;
-
-            const archivoLogo = document.getElementById("cfg-logo").files[0];
-            if (archivoLogo) nuevo.logo_url = await subirImagen(archivoLogo, "logo", "heaven-sitio");
-
-            const archivoPopup1 = document.getElementById("cfg-popup1-imagen").files[0];
-            if (archivoPopup1) nuevo.popup1_imagen = await subirImagen(archivoPopup1, "popup1", "heaven-sitio");
-
-            const archivoPopup2 = document.getElementById("cfg-popup2-imagen").files[0];
-            if (archivoPopup2) nuevo.popup2_imagen = await subirImagen(archivoPopup2, "popup2", "heaven-sitio");
-
-            const { error } = await sb
-                .from("configuracion_heaven")
-                .upsert({ id: 1, datos: nuevo });
-
-            if (error) throw error;
-
-            CONFIG = nuevo;
-            aplicarConfiguracion();
-            document.getElementById("cfg-logo").value = "";
-            document.getElementById("cfg-popup1-imagen").value = "";
-            document.getElementById("cfg-popup2-imagen").value = "";
-            cfgEstado.textContent = "✅ Contenido del sitio actualizado.";
-        } catch (error) {
-            console.error(error);
-            cfgEstado.textContent = "❌ No se pudo guardar: " + (error.message || "error desconocido");
-        } finally {
-            cfgGuardarBtn.disabled = false;
-        }
-    }
-
-    function mostrarTab(nombre) {
-        const esProductos = nombre === "productos";
-        vistaProductos.classList.toggle("visible", esProductos);
-        vistaContenido.classList.toggle("visible", !esProductos);
-
-        tabBtnProductos.classList.toggle("principal", esProductos);
-        tabBtnProductos.classList.toggle("secundario", !esProductos);
-        tabBtnContenido.classList.toggle("principal", !esProductos);
-        tabBtnContenido.classList.toggle("secundario", esProductos);
-
-        if (!esProductos) rellenarFormularioConfig();
-    }
-
-    mostrarTab("productos");
-
-    if (tabBtnProductos) tabBtnProductos.addEventListener("click", () => mostrarTab("productos"));
-    if (tabBtnContenido) tabBtnContenido.addEventListener("click", () => mostrarTab("contenido"));
-    if (cfgGuardarBtn) cfgGuardarBtn.addEventListener("click", guardarConfiguracion);
-    if (cerrarSesionBtn2) cerrarSesionBtn2.addEventListener("click", () => cerrarSesionBtn.click());
-
-    async function guardarProducto() {
-        if (!esAdmin()) {
-            loginEstado.textContent = "Sesión de administrador no válida.";
-            return;
-        }
-
-        const nombre = fNombre.value.trim();
-        const precio = Number(fPrecio.value);
-        const tallas = fTallas.value.split(",").map(x => x.trim()).filter(Boolean);
-        const detalle = fDetalle.value.trim();
-        const etiqueta = fEtiqueta.value.trim();
-        const orden = Number.isFinite(Number(fOrden.value)) ? Number(fOrden.value) : 0;
-        const archivo = fImagen.files && fImagen.files[0];
-
-        if (!nombre) return adminEstado.textContent = "Escribe el nombre del producto.";
-        if (!Number.isFinite(precio) || precio < 0) return adminEstado.textContent = "Escribe un precio válido.";
-        if (!tallas.length) return adminEstado.textContent = "Escribe al menos una talla.";
-        if (!detalle) return adminEstado.textContent = "Escribe una descripción.";
-        if (!productoEditando && !archivo) return adminEstado.textContent = "Selecciona una imagen.";
-
-        guardarBtn.disabled = true;
-        adminEstado.textContent = productoEditando ? "Guardando cambios..." : "Publicando producto...";
-
-        try {
-            if (productoEditando) {
-                let imagen_url = productoEditando.imagen_url;
-                if (archivo) imagen_url = await subirImagen(archivo, productoEditando.id);
-
-                const { error } = await sb.from("productos_heaven").update({
-                    nombre, precio, tallas, detalle, etiqueta, imagen_url,
-                    activo: fActivo.checked, destacado: fDestacado.checked, orden
-                }).eq("id", productoEditando.id);
-
-                if (error) throw error;
-                adminEstado.textContent = "✅ Producto actualizado.";
-            } else {
-                const { data: creado, error: errorCrear } = await sb.from("productos_heaven").insert({
-                    nombre, precio, tallas, detalle, etiqueta,
-                    imagen_url: "https://placehold.co/800x800/111114/c8a96b?text=Subiendo...",
-                    activo: fActivo.checked, destacado: fDestacado.checked, orden
-                }).select().single();
-
-                if (errorCrear) throw errorCrear;
-
-                const imagen_url = await subirImagen(archivo, creado.id);
-                const { error: errorImagen } = await sb.from("productos_heaven").update({imagen_url}).eq("id", creado.id);
-                if (errorImagen) throw errorImagen;
-
-                adminEstado.textContent = "✅ Producto publicado.";
-            }
-
-            limpiarFormulario();
-            await cargarProductos();
-        } catch (error) {
-            console.error(error);
-            adminEstado.textContent = "❌ No se pudo guardar: " + (error.message || "error desconocido");
-        } finally {
-            guardarBtn.disabled = false;
-        }
-    }
-
-    async function eliminarProducto(p) {
-        if (!confirm(`¿Eliminar definitivamente “${p.nombre}”?`)) return;
-        adminEstado.textContent = "Eliminando...";
-        const { error } = await sb.from("productos_heaven").delete().eq("id", p.id);
-        if (error) {
-            adminEstado.textContent = "❌ No se pudo eliminar: " + error.message;
-            return;
-        }
-        if (productoEditando && productoEditando.id === p.id) limpiarFormulario();
-        adminEstado.textContent = "✅ Producto eliminado.";
-        await cargarProductos();
-    }
-
-    async function alternarActivo(p) {
-        const { error } = await sb.from("productos_heaven").update({activo: !p.activo}).eq("id", p.id);
-        if (error) {
-            adminEstado.textContent = "❌ No se pudo cambiar la visibilidad: " + error.message;
-            return;
-        }
-        await cargarProductos();
-    }
-
-    function renderListaAdmin() {
-        adminLista.innerHTML = "";
-        if (!productosDB.length) {
-            adminLista.innerHTML = "<p style='color:#aaa'>No hay productos.</p>";
-            return;
-        }
-
-        productosDB.forEach(p => {
-            const item = document.createElement("div");
-            item.className = "admin-item";
-            item.innerHTML = `
-                <img src="${esc(p.imagen_url)}" alt="${esc(p.nombre)}">
-                <div>
-                    <h4>${esc(p.nombre)}</h4>
-                    <small>$${Number(p.precio).toFixed(2)} · ${(p.tallas || []).join(", ")} · ${p.activo ? "Visible" : "Oculto"}</small>
-                </div>
-                <div class="admin-item-acciones">
-                    <button type="button" data-editar="${p.id}">✏️ Editar</button>
-                    <button type="button" data-visible="${p.id}">${p.activo ? "👁️ Ocultar" : "👁️ Mostrar"}</button>
-                    <button type="button" data-eliminar="${p.id}">🗑️</button>
-                </div>
-            `;
-            adminLista.appendChild(item);
-        });
-
-        adminLista.querySelectorAll("[data-editar]").forEach(btn => {
-            btn.onclick = () => editarProducto(productosDB.find(p => String(p.id) === btn.dataset.editar));
-        });
-        adminLista.querySelectorAll("[data-visible]").forEach(btn => {
-            btn.onclick = () => alternarActivo(productosDB.find(p => String(p.id) === btn.dataset.visible));
-        });
-        adminLista.querySelectorAll("[data-eliminar]").forEach(btn => {
-            btn.onclick = () => eliminarProducto(productosDB.find(p => String(p.id) === btn.dataset.eliminar));
-        });
-    }
-
-    adminBoton.addEventListener("click", () => {
-        if (esAdmin()) {
-            abrir(panelOverlay);
-            cargarProductos();
-            rellenarFormularioConfig();
-        } else {
-            abrir(loginOverlay);
-        }
-    });
-
-    loginCerrar.addEventListener("click", () => cerrar(loginOverlay));
-    panelCerrar.addEventListener("click", () => cerrar(panelOverlay));
-    cancelarBtn.addEventListener("click", limpiarFormulario);
-    guardarBtn.addEventListener("click", guardarProducto);
-
-    loginBtn.addEventListener("click", async () => {
-        const password = loginPassword.value;
-        if (!password) {
-            loginEstado.textContent = "Escribe tu contraseña.";
-            return;
-        }
-        loginBtn.disabled = true;
-        loginEstado.textContent = "Verificando...";
-
-        const { data, error } = await sb.auth.signInWithPassword({
-            email: ADMIN_EMAIL,
-            password
-        });
-
-        if (error) {
-            loginEstado.textContent = "❌ Contraseña incorrecta o cuenta no creada todavía.";
-            loginBtn.disabled = false;
-            return;
-        }
-
-        const email = data.user && data.user.email;
-        if (!email || email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
-            await sb.auth.signOut();
-            loginEstado.textContent = "❌ Esa cuenta no es administradora.";
-            loginBtn.disabled = false;
-            return;
-        }
-
-        window.__heavenAdmin = true;
-        mostrarBotonAdmin();
-        loginPassword.value = "";
-        loginEstado.textContent = "✅ Sesión iniciada.";
-        cerrar(loginOverlay);
-        abrir(panelOverlay);
-        loginBtn.disabled = false;
-        await cargarProductos();
-        rellenarFormularioConfig();
-    });
-
-    cerrarSesionBtn.addEventListener("click", async () => {
-        await sb.auth.signOut();
-        window.__heavenAdmin = false;
-        mostrarBotonAdmin();
-        cerrar(panelOverlay);
-        limpiarFormulario();
-    });
-
-    buscador.addEventListener("input", renderCatalogo);
-
-    // Link de cliente: el link normal de la tienda (sin nada extra).
-    // Link de administrador: el mismo link agregando "v2" al final
-    // (ej. tu-tienda.com/v2, tu-tienda.com?v2 o tu-tienda.com#v2).
-    function esLinkAdmin() {
-        const ruta = location.pathname.replace(/\/+$/, "").toLowerCase();
-        if (/(^|\/)v2$/.test(ruta)) return true;
-        if (new URLSearchParams(location.search).has("v2")) return true;
-        if (location.hash.replace("#", "").toLowerCase() === "v2") return true;
-        return false;
-    }
-
-    if (esLinkAdmin()) {
-        abrir(loginOverlay);
-    }
-
-    // Sesión persistente: el admin inicia sesión una vez en ese navegador.
-    sb.auth.onAuthStateChange(async (_event, session) => {
-        const email = session && session.user && session.user.email;
-        window.__heavenAdmin = !!session && email && email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
-        mostrarBotonAdmin();
-        if (window.__heavenAdmin) await cargarProductos();
-    });
-
-    // Catálogo público: no requiere iniciar sesión.
-    cargarProductos();
-
-    // Contenido del sitio: se carga para todos los visitantes.
-    cargarConfiguracion();
-
-    // Cambios en tiempo real para que el catálogo se actualice sin recargar.
-    sb.channel("catalogo-productos")
-        .on("postgres_changes", {
-            event: "*",
-            schema: "public",
-            table: "productos_heaven"
-        }, () => {
-            cargarProductos();
-        })
-        .subscribe();
-
-    // Cambios en tiempo real del contenido del sitio.
-    sb.channel("configuracion-sitio")
-        .on("postgres_changes", {
-            event: "*",
-            schema: "public",
-            table: "configuracion_heaven"
-        }, () => {
-            cargarConfiguracion();
-        })
-        .subscribe();
-})();
+  }
+
+  function renderAdminProductList() {
+    if (!isAdminView) return;
+    const contenedor = document.getElementById("admin-product-list");
+    if (!contenedor) return;
+
+    contenedor.innerHTML = state.productos
+      .map(
+        (p) => `
+      <div class="flex items-center gap-4 py-3">
+        <div class="w-12 h-12 rounded-lg overflow-hidden bg-blush-50 shrink-0 border border-ink/10">
+          ${
+            p.imagen_url
+              ? `<img src="${escapeHtml(p.imagen_url)}" class="w-full h-full object-cover" alt="${escapeHtml(p.nombre)}" />`
+              : ""
+          }
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">${escapeHtml(p.nombre)}</p>
+          <p class="text-xs text-ink/50">${escapeHtml(p.categoria)} · ${fmt(p.precio)}</p>
+        </div>
+        <button onclick="eliminarProducto('${p.id}')" class="text-xs font-semibold text-red-500 hover:opacity-70 shrink-0">
+          Eliminar
+        </button>
+      </div>`
+      )
+      .join("");
+  }
+
+  // ---------------------------------------------------------
+  // 10. REALTIME — SINCRONIZACIÓN INSTANTÁNEA
+  //     Cuando el admin guarda cambios, la tienda del cliente
+  //     (y cualquier otra sesión de admin abierta) se actualiza
+  //     al instante sin recargar la página.
+  // ---------------------------------------------------------
+  supabaseClient
+    .channel("heaven-division-realtime")
+    .on("postgres_changes", { event: "*", schema: "public", table: "productos" }, () => {
+      cargarProductos();
+    })
+    .on("postgres_changes", { event: "*", schema: "public", table: "configuracion_tienda" }, () => {
+      cargarConfiguracion();
+    })
+    .subscribe();
+
+  // ---------------------------------------------------------
+  // 11. INICIALIZACIÓN
+  // ---------------------------------------------------------
+  document.getElementById("year").textContent = new Date().getFullYear();
+  cargarConfiguracion();
+  cargarProductos();
 </script>
-
 </body>
 </html>
