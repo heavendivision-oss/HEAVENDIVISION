@@ -72,8 +72,52 @@
   }
   .shelf-fade { animation: shelfFade 800ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both; }
 
+  /* ---- Notificaciones (toasts) ---- */
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateY(-8px) translateX(12px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+  }
+  @keyframes toastOut {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to   { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  }
+  .toast-in { animation: toastIn 380ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .toast-out { animation: toastOut 220ms ease both; }
+
+  /* ---- Lightbox de producto (zoom + brillo) ---- */
+  #lightbox-overlay { transition: opacity 280ms ease; }
+  @keyframes lightboxPop {
+    from { opacity: 0; transform: scale(0.9) translateY(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .lightbox-pop { animation: lightboxPop 420ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+  .lightbox-image-wrap { position: relative; overflow: hidden; }
+  .lightbox-shine {
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 35%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.75) 50%, transparent 100%);
+    transform: skewX(-18deg);
+    opacity: 0;
+  }
+  .lightbox-shine.run {
+    animation: shineSweep 1300ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+  }
+  @keyframes shineSweep {
+    0%   { left: -60%; opacity: 0; }
+    12%  { opacity: 1; }
+    100% { left: 130%; opacity: 0; }
+  }
+
+  .zoom-cursor { cursor: zoom-in; }
+
   @media (prefers-reduced-motion: reduce) {
-    .hero-rise, .shelf-fade, #cart-drawer, #cart-overlay { animation: none !important; transition: none !important; }
+    .hero-rise, .shelf-fade, #cart-drawer, #cart-overlay,
+    .toast-in, .toast-out, .lightbox-pop, .lightbox-shine.run { animation: none !important; transition: none !important; }
   }
 
   /* ---- Tarjetas de producto ---- */
@@ -90,6 +134,9 @@
 </head>
 
 <body class="text-ink">
+
+<!-- ---- Notificaciones (toasts) ---- -->
+<div id="toast-container" class="fixed top-5 right-5 z-[80] flex flex-col gap-3 items-end pointer-events-none"></div>
 
 <!-- ======================================================= -->
 <!-- VISTA: TIENDA (CLIENTE)                                  -->
@@ -247,6 +294,20 @@
       </div>
     </div>
   </aside>
+
+  <!-- ---- Lightbox: imagen ampliada con animación de brillo ---- -->
+  <div id="lightbox-overlay" class="hidden fixed inset-0 bg-ink/80 z-[70] opacity-0 flex items-center justify-center p-4 sm:p-8">
+    <button id="lightbox-close" aria-label="Cerrar imagen" class="absolute top-5 right-5 text-white/80 hover:text-white transition-colors">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div id="lightbox-content" class="w-full max-w-xl">
+      <div class="lightbox-image-wrap rounded-2xl bg-white">
+        <img id="lightbox-img" src="" alt="" class="w-full h-auto max-h-[72vh] object-contain rounded-2xl" />
+        <div id="lightbox-shine" class="lightbox-shine"></div>
+      </div>
+      <p id="lightbox-caption" class="text-white/90 text-center mt-4 text-sm font-medium tracking-wide"></p>
+    </div>
+  </div>
 </div>
 
 <!-- ======================================================= -->
@@ -290,7 +351,6 @@
           Guardar
         </button>
       </form>
-      <p id="topbar-saved-msg" class="hidden text-xs text-green-600 mt-2">Guardado ✓</p>
     </section>
 
     <!-- Imágenes de la tienda: logo y escaparate principal -->
@@ -323,7 +383,6 @@
           <button type="submit" id="images-save-btn" class="bg-ink text-white rounded-full px-6 py-2 text-sm font-semibold hover:bg-blush-600 transition-colors disabled:opacity-50">
             Guardar imágenes
           </button>
-          <span id="images-saved-msg" class="hidden text-xs text-green-600 ml-3">Guardado ✓</span>
         </div>
       </form>
     </section>
@@ -409,6 +468,67 @@
   const fmt = (n) => `$${Number(n || 0).toFixed(2)}`;
 
   // ---------------------------------------------------------
+  // 2.1 NOTIFICACIONES (TOAST) — reemplazan a alert()
+  // ---------------------------------------------------------
+  function toast(mensaje, tipo = "success") {
+    const contenedor = document.getElementById("toast-container");
+
+    const estilos = {
+      success: { borde: "border-l-emerald-500", icono: '<path d="M20 6 9 17l-5-5"/>' },
+      error:   { borde: "border-l-red-500",     icono: '<path d="M18 6 6 18M6 6l12 12"/>' },
+      info:    { borde: "border-l-ink",         icono: '<circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="16.5" r="0.6" fill="currentColor"/>' },
+    };
+    const s = estilos[tipo] || estilos.info;
+
+    const el = document.createElement("div");
+    el.className = `toast-in pointer-events-auto bg-white border border-ink/10 border-l-4 ${s.borde} rounded-xl shadow-lg px-4 py-3 flex items-center gap-3 text-sm font-medium max-w-xs`;
+    el.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0">${s.icono}</svg>
+      <span>${escapeHtml(mensaje)}</span>
+    `;
+    contenedor.appendChild(el);
+
+    setTimeout(() => {
+      el.classList.remove("toast-in");
+      el.classList.add("toast-out");
+      setTimeout(() => el.remove(), 220);
+    }, 3200);
+  }
+
+  // ---------------------------------------------------------
+  // 2.2 LIGHTBOX — imagen ampliada con animación de brillo
+  // ---------------------------------------------------------
+  const lightboxOverlay = document.getElementById("lightbox-overlay");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxCaption = document.getElementById("lightbox-caption");
+  const lightboxShine = document.getElementById("lightbox-shine");
+
+  function abrirLightbox(url, nombre) {
+    lightboxImg.src = url;
+    lightboxCaption.textContent = nombre || "";
+    lightboxOverlay.classList.remove("hidden");
+    requestAnimationFrame(() => lightboxOverlay.classList.remove("opacity-0"));
+
+    // Reinicia la animación de brillo cada vez que se abre
+    lightboxShine.classList.remove("run");
+    void lightboxShine.offsetWidth; // fuerza reflow
+    lightboxShine.classList.add("run");
+  }
+
+  function cerrarLightbox() {
+    lightboxOverlay.classList.add("opacity-0");
+    setTimeout(() => lightboxOverlay.classList.add("hidden"), 280);
+  }
+
+  document.getElementById("lightbox-close").addEventListener("click", cerrarLightbox);
+  lightboxOverlay.addEventListener("click", (e) => {
+    if (e.target === lightboxOverlay) cerrarLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") cerrarLightbox();
+  });
+
+  // ---------------------------------------------------------
   // 3.1 SUBIDA DE IMÁGENES DESDE LA GALERÍA (Supabase Storage)
   // ---------------------------------------------------------
   const STORAGE_BUCKET = "imagenes";
@@ -423,7 +543,7 @@
       .upload(nombreArchivo, file, { cacheControl: "3600", upsert: false });
 
     if (error) {
-      alert("No se pudo subir la imagen: " + error.message);
+      toast("No se pudo subir la imagen: " + error.message, "error");
       return null;
     }
 
@@ -549,7 +669,7 @@
 
     return `
       <article class="product-card border border-ink/10 rounded-2xl overflow-hidden bg-white flex flex-col">
-        <div class="aspect-[4/5] overflow-hidden bg-blush-50">${imagen}</div>
+        <div class="aspect-[4/5] overflow-hidden bg-blush-50 zoom-cursor" data-lightbox-img="${escapeHtml(p.imagen_url || "")}" data-lightbox-name="${escapeHtml(p.nombre)}">${imagen}</div>
         <div class="p-4 flex flex-col flex-1">
           <h3 class="font-semibold leading-snug mb-1">${escapeHtml(p.nombre)}</h3>
           <p class="text-xs text-ink/60 mb-3 line-clamp-2 flex-1">${escapeHtml(p.descripcion || "")}</p>
@@ -575,6 +695,12 @@
 
     grid.querySelectorAll("[data-add-id]").forEach((btn) => {
       btn.addEventListener("click", () => agregarAlCarrito(btn.getAttribute("data-add-id")));
+    });
+
+    grid.querySelectorAll("[data-lightbox-img]").forEach((el) => {
+      const url = el.getAttribute("data-lightbox-img");
+      if (!url) return;
+      el.addEventListener("click", () => abrirLightbox(url, el.getAttribute("data-lightbox-name")));
     });
   }
 
@@ -780,9 +906,9 @@
         .update({ top_bar_texto: nuevoTexto })
         .eq("id", 1);
       if (!error) {
-        const msg = document.getElementById("topbar-saved-msg");
-        msg.classList.remove("hidden");
-        setTimeout(() => msg.classList.add("hidden"), 2000);
+        toast("Barra superior actualizada", "success");
+      } else {
+        toast("Error al guardar: " + error.message, "error");
       }
     });
 
@@ -792,7 +918,10 @@
       const logoFile = document.getElementById("logo-file-input").files[0];
       const heroFile = document.getElementById("hero-file-input").files[0];
 
-      if (!logoFile && !heroFile) return;
+      if (!logoFile && !heroFile) {
+        toast("Selecciona al menos una imagen para guardar", "info");
+        return;
+      }
 
       btn.disabled = true;
       btn.textContent = "Subiendo...";
@@ -815,11 +944,9 @@
         if (!error) {
           document.getElementById("logo-file-input").value = "";
           document.getElementById("hero-file-input").value = "";
-          const msg = document.getElementById("images-saved-msg");
-          msg.classList.remove("hidden");
-          setTimeout(() => msg.classList.add("hidden"), 2000);
+          toast("Imágenes actualizadas", "success");
         } else {
-          alert("Ocurrió un error al guardar las imágenes: " + error.message);
+          toast("Error al guardar las imágenes: " + error.message, "error");
         }
       }
 
@@ -833,7 +960,7 @@
       const file = document.getElementById("product-imagen-file").files[0];
 
       if (!file) {
-        alert("Selecciona una foto para la prenda.");
+        toast("Selecciona una foto para la prenda", "info");
         return;
       }
 
@@ -857,8 +984,9 @@
       const { error } = await supabaseClient.from("productos").insert(nuevoProducto);
       if (!error) {
         e.target.reset();
+        toast("Prenda publicada", "success");
       } else {
-        alert("Ocurrió un error al publicar la prenda: " + error.message);
+        toast("Error al publicar la prenda: " + error.message, "error");
       }
 
       btn.disabled = false;
@@ -867,7 +995,12 @@
 
     window.eliminarProducto = async (id) => {
       if (!confirm("¿Eliminar esta prenda?")) return;
-      await supabaseClient.from("productos").delete().eq("id", id);
+      const { error } = await supabaseClient.from("productos").delete().eq("id", id);
+      if (!error) {
+        toast("Prenda eliminada", "success");
+      } else {
+        toast("Error al eliminar: " + error.message, "error");
+      }
     };
   }
 
