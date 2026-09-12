@@ -9,7 +9,7 @@
 <!-- ============== FUENTES ============== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- ============== TAILWIND (CDN) ============== -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -35,6 +35,7 @@
         fontFamily: {
           display: ['Anton', 'sans-serif'],
           body: ['Inter', 'sans-serif'],
+          tag: ['Permanent Marker', 'cursive'],
         },
       },
     },
@@ -130,6 +131,82 @@
   a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
     outline: 2px solid #121212; outline-offset: 2px;
   }
+
+  /* ===================================================== */
+  /* PANEL ADMIN — ESTÉTICA GRAFITERA                       */
+  /* ===================================================== */
+  .font-tag { font-family: 'Permanent Marker', cursive; }
+
+  #admin-app {
+    background-color: #171614;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.045) 0, transparent 45%),
+      radial-gradient(circle at 85% 75%, rgba(255,255,255,0.04) 0, transparent 50%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 34px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 140px);
+    position: relative;
+  }
+
+  /* Splatters de spray flotando en el fondo del panel admin */
+  .spray-blob { position: absolute; border-radius: 50%; filter: blur(2px); pointer-events: none; opacity: 0.85; z-index: 0; }
+  .admin-card { position: relative; z-index: 1; }
+
+  .graffiti-card {
+    background: #1f1d1a;
+    border: 2px solid rgba(255,255,255,0.08);
+    box-shadow: 0 18px 40px -18px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  .graffiti-title {
+    display: inline-block;
+    transform: rotate(-2deg);
+    text-shadow: 2px 2px 0 rgba(222,140,162,0.35);
+  }
+
+  .spray-underline { position: relative; display: inline-block; }
+  .spray-underline::after {
+    content: "";
+    position: absolute;
+    left: -4%; right: -4%; bottom: -6px;
+    height: 9px;
+    background: linear-gradient(90deg, #DE8CA2, #C9A177 60%, transparent);
+    border-radius: 999px;
+    opacity: 0.9;
+    transform: rotate(-1deg);
+  }
+
+  .tape {
+    position: absolute;
+    background: rgba(244,201,211,0.85);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+    height: 26px;
+  }
+
+  .admin-btn-spray {
+    background: linear-gradient(120deg, #DE8CA2, #C96F89 55%, #A85770);
+    box-shadow: 0 10px 24px -8px rgba(222,140,162,0.55);
+  }
+  .admin-btn-spray:hover { filter: brightness(1.08); }
+
+  .stencil-input {
+    background: #14130f;
+    border: 1.5px dashed rgba(244,201,211,0.35);
+    color: #f5f0e8;
+  }
+  .stencil-input::placeholder { color: rgba(245,240,232,0.35); }
+  .stencil-input:focus { border-color: #DE8CA2; border-style: solid; outline: none; }
+
+  .marker-label { font-family: 'Permanent Marker', cursive; letter-spacing: 0.02em; }
+
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+  }
+  .float-slow { animation: floatSlow 7s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .float-slow { animation: none !important; }
+  }
 </style>
 </head>
 
@@ -152,9 +229,9 @@
   <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-ink/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-16 gap-4">
-        <a href="index.html" id="nav-logo-link" class="flex items-center shrink-0">
-          <img id="nav-logo-img" src="" alt="HEAVEN DIVISION" class="hidden h-9 w-auto object-contain" />
-          <span id="nav-logo-text" class="font-display text-xl sm:text-2xl tracking-wide">
+        <a href="index.html" id="nav-logo-link" class="flex items-center gap-2.5 shrink-0">
+          <img id="nav-logo-img" src="" alt="HEAVEN DIVISION" class="hidden h-9 w-9 sm:h-10 sm:w-10 object-contain shrink-0" />
+          <span id="nav-logo-text" class="font-display text-xl sm:text-2xl tracking-wide whitespace-nowrap">
             HEAVEN <span class="text-blush-600">DIVISION</span>
           </span>
         </a>
@@ -313,74 +390,85 @@
 <!-- ======================================================= -->
 <!-- VISTA: ADMINISTRADOR (index.html?view=admin)             -->
 <!-- ======================================================= -->
-<div id="admin-app" class="hidden min-h-screen bg-blush-50">
+<div id="admin-app" class="hidden min-h-screen">
 
   <!-- ---- Pantalla de login ---- -->
-  <div id="admin-login" class="min-h-screen flex items-center justify-center px-4">
-    <form id="admin-login-form" class="bg-white border border-ink/10 rounded-2xl shadow-sm p-8 w-full max-w-sm">
-      <p class="font-display text-2xl mb-1">HEAVEN DIVISION</p>
-      <p class="text-ink/60 text-sm mb-6">Panel de administrador</p>
-      <label class="text-xs font-semibold text-ink/60 block mb-1">Contraseña</label>
-      <input id="admin-password" type="password" required
-        class="w-full border border-ink/20 rounded-lg px-3 py-2 mb-2 focus:border-blush-600 transition-colors" />
-      <p id="admin-login-error" class="hidden text-xs text-red-500 mb-3">Contraseña incorrecta.</p>
-      <button type="submit" class="w-full bg-ink text-white rounded-full py-3 text-sm font-semibold hover:bg-blush-600 transition-colors mt-2">
-        Entrar
+  <div id="admin-login" class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+    <!-- Splatters decorativos -->
+    <div class="spray-blob float-slow" style="top:8%; left:10%; width:180px; height:180px; background:radial-gradient(circle, rgba(222,140,162,0.35), transparent 70%);"></div>
+    <div class="spray-blob float-slow" style="bottom:10%; right:8%; width:220px; height:220px; background:radial-gradient(circle, rgba(201,161,119,0.3), transparent 70%); animation-delay:1.5s;"></div>
+    <div class="spray-blob" style="top:40%; right:18%; width:90px; height:90px; background:radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);"></div>
+
+    <form id="admin-login-form" class="admin-card graffiti-card rounded-2xl p-8 w-full max-w-sm relative">
+      <div class="tape -top-3 -left-4 w-20 rotate-[-8deg]"></div>
+      <p class="font-tag text-4xl text-blush-400 graffiti-title spray-underline mb-3">HEAVEN DIVISION</p>
+      <p class="text-white/50 text-sm mb-6 tracking-wide">// Panel de administrador</p>
+      <label class="marker-label text-sm text-blush-300 block mb-1">Contraseña</label>
+      <input id="admin-password" type="password" required placeholder="••••••••"
+        class="stencil-input w-full rounded-lg px-3 py-2 mb-2 transition-colors" />
+      <p id="admin-login-error" class="hidden text-xs text-red-400 mb-3">Contraseña incorrecta.</p>
+      <button type="submit" class="admin-btn-spray w-full text-white rounded-full py-3 text-sm font-bold tracking-wide hover:opacity-95 transition-all mt-2">
+        ENTRAR
       </button>
-      <a href="index.html" class="block text-center text-xs text-ink/50 mt-4 hover:text-blush-600">← Volver a la tienda</a>
+      <a href="index.html" class="block text-center text-xs text-white/40 mt-4 hover:text-blush-300 transition-colors">← Volver a la tienda</a>
     </form>
   </div>
 
   <!-- ---- Dashboard admin ---- -->
-  <div id="admin-dashboard" class="hidden max-w-5xl mx-auto px-4 sm:px-6 py-10">
-    <div class="flex items-center justify-between mb-8">
-      <p class="font-display text-2xl">PANEL ADMIN</p>
+  <div id="admin-dashboard" class="hidden max-w-5xl mx-auto px-4 sm:px-6 py-10 relative">
+    <div class="spray-blob" style="top:-40px; right:-60px; width:260px; height:260px; background:radial-gradient(circle, rgba(222,140,162,0.22), transparent 70%);"></div>
+    <div class="spray-blob" style="bottom:0; left:-80px; width:220px; height:220px; background:radial-gradient(circle, rgba(201,161,119,0.18), transparent 70%);"></div>
+
+    <div class="admin-card flex items-center justify-between mb-10">
+      <p class="font-tag text-3xl sm:text-4xl text-blush-400 graffiti-title spray-underline">PANEL ADMIN</p>
       <div class="flex items-center gap-4">
-        <a href="index.html" class="text-sm font-semibold hover:text-blush-600">Ver tienda</a>
-        <button id="admin-logout" class="text-sm font-semibold text-red-500 hover:opacity-70">Salir</button>
+        <a href="index.html" class="text-sm font-semibold text-white/70 hover:text-blush-300 transition-colors">Ver tienda</a>
+        <button id="admin-logout" class="text-sm font-semibold text-red-400 hover:opacity-70">Salir</button>
       </div>
     </div>
 
     <!-- Configuración de la barra superior -->
-    <section class="bg-white border border-ink/10 rounded-2xl p-6 mb-8">
-      <h2 class="font-semibold mb-4">Barra superior de anuncios</h2>
+    <section class="admin-card graffiti-card rounded-2xl p-6 mb-8 relative">
+      <div class="tape -top-3 left-6 w-16 rotate-[-5deg]"></div>
+      <h2 class="marker-label text-lg text-blush-300 mb-4">Barra superior de anuncios</h2>
       <form id="topbar-form" class="flex flex-col sm:flex-row gap-3">
         <input id="topbar-input" type="text" required placeholder="Texto de la barra superior"
-          class="flex-1 border border-ink/20 rounded-lg px-3 py-2 focus:border-blush-600 transition-colors" />
-        <button type="submit" class="bg-ink text-white rounded-full px-6 py-2 text-sm font-semibold hover:bg-blush-600 transition-colors">
+          class="stencil-input flex-1 rounded-lg px-3 py-2 transition-colors" />
+        <button type="submit" class="admin-btn-spray text-white rounded-full px-6 py-2 text-sm font-bold hover:opacity-95 transition-all">
           Guardar
         </button>
       </form>
     </section>
 
     <!-- Imágenes de la tienda: logo y escaparate principal -->
-    <section class="bg-white border border-ink/10 rounded-2xl p-6 mb-8">
-      <h2 class="font-semibold mb-4">Imágenes de la tienda</h2>
+    <section class="admin-card graffiti-card rounded-2xl p-6 mb-8 relative">
+      <div class="tape -top-3 right-10 w-16 rotate-[6deg]"></div>
+      <h2 class="marker-label text-lg text-blush-300 mb-4">Imágenes de la tienda</h2>
       <form id="images-form" class="grid sm:grid-cols-2 gap-6">
         <div>
-          <label class="text-xs font-semibold text-ink/60 block mb-2">Logo (barra de navegación)</label>
+          <label class="text-xs font-semibold text-white/50 block mb-2 tracking-wide uppercase">Logo (barra de navegación)</label>
           <div class="flex items-center gap-3 mb-2">
-            <div class="w-14 h-14 rounded-lg border border-ink/10 bg-blush-50 overflow-hidden flex items-center justify-center shrink-0">
+            <div class="w-14 h-14 rounded-lg border border-blush-400/20 bg-black/30 overflow-hidden flex items-center justify-center shrink-0">
               <img id="logo-preview" src="" alt="" class="hidden w-full h-full object-contain" />
-              <span id="logo-preview-empty" class="text-[10px] text-ink/30 text-center px-1">Sin logo</span>
+              <span id="logo-preview-empty" class="text-[10px] text-white/30 text-center px-1">Sin logo</span>
             </div>
-            <input id="logo-file-input" type="file" accept="image/*" class="text-xs" />
+            <input id="logo-file-input" type="file" accept="image/*" class="text-xs text-white/60" />
           </div>
-          <p class="text-xs text-ink/40">Deja vacío para mostrar el nombre en texto.</p>
+          <p class="text-xs text-white/35">El ícono se muestra junto al texto "HEAVEN DIVISION". Si lo dejas vacío, solo se ve el texto.</p>
         </div>
         <div>
-          <label class="text-xs font-semibold text-ink/60 block mb-2">Imagen del escaparate (hero)</label>
+          <label class="text-xs font-semibold text-white/50 block mb-2 tracking-wide uppercase">Imagen del escaparate (hero)</label>
           <div class="flex items-center gap-3 mb-2">
-            <div class="w-14 h-14 rounded-lg border border-ink/10 bg-blush-50 overflow-hidden flex items-center justify-center shrink-0">
+            <div class="w-14 h-14 rounded-lg border border-blush-400/20 bg-black/30 overflow-hidden flex items-center justify-center shrink-0">
               <img id="hero-preview" src="" alt="" class="hidden w-full h-full object-cover" />
-              <span id="hero-preview-empty" class="text-[10px] text-ink/30 text-center px-1">Sin imagen</span>
+              <span id="hero-preview-empty" class="text-[10px] text-white/30 text-center px-1">Sin imagen</span>
             </div>
-            <input id="hero-file-input" type="file" accept="image/*" class="text-xs" />
+            <input id="hero-file-input" type="file" accept="image/*" class="text-xs text-white/60" />
           </div>
-          <p class="text-xs text-ink/40">Se muestra en grande junto al título principal.</p>
+          <p class="text-xs text-white/35">Se muestra en grande junto al título principal.</p>
         </div>
         <div class="sm:col-span-2">
-          <button type="submit" id="images-save-btn" class="bg-ink text-white rounded-full px-6 py-2 text-sm font-semibold hover:bg-blush-600 transition-colors disabled:opacity-50">
+          <button type="submit" id="images-save-btn" class="admin-btn-spray text-white rounded-full px-6 py-2 text-sm font-bold hover:opacity-95 transition-all disabled:opacity-50">
             Guardar imágenes
           </button>
         </div>
@@ -388,28 +476,29 @@
     </section>
 
     <!-- Nueva prenda -->
-    <section class="bg-white border border-ink/10 rounded-2xl p-6 mb-8">
-      <h2 class="font-semibold mb-4">Publicar nueva prenda</h2>
+    <section class="admin-card graffiti-card rounded-2xl p-6 mb-8 relative">
+      <div class="tape -top-3 left-1/2 -translate-x-1/2 w-20 rotate-[3deg]"></div>
+      <h2 class="marker-label text-lg text-blush-300 mb-4">Publicar nueva prenda</h2>
       <form id="product-form" class="grid sm:grid-cols-2 gap-4">
         <div>
-          <label class="text-xs font-semibold text-ink/60 block mb-1">Nombre</label>
-          <input id="product-nombre" type="text" required class="w-full border border-ink/20 rounded-lg px-3 py-2 focus:border-blush-600 transition-colors" />
+          <label class="text-xs font-semibold text-white/50 block mb-1 tracking-wide uppercase">Nombre</label>
+          <input id="product-nombre" type="text" required class="stencil-input w-full rounded-lg px-3 py-2 transition-colors" />
         </div>
         <div>
-          <label class="text-xs font-semibold text-ink/60 block mb-1">Precio</label>
-          <input id="product-precio" type="number" min="0" step="0.01" required class="w-full border border-ink/20 rounded-lg px-3 py-2 focus:border-blush-600 transition-colors" />
+          <label class="text-xs font-semibold text-white/50 block mb-1 tracking-wide uppercase">Precio</label>
+          <input id="product-precio" type="number" min="0" step="0.01" required class="stencil-input w-full rounded-lg px-3 py-2 transition-colors" />
         </div>
         <div class="sm:col-span-2">
-          <label class="text-xs font-semibold text-ink/60 block mb-1">Descripción breve</label>
-          <textarea id="product-descripcion" rows="2" required class="w-full border border-ink/20 rounded-lg px-3 py-2 resize-none focus:border-blush-600 transition-colors"></textarea>
+          <label class="text-xs font-semibold text-white/50 block mb-1 tracking-wide uppercase">Descripción breve</label>
+          <textarea id="product-descripcion" rows="2" required class="stencil-input w-full rounded-lg px-3 py-2 resize-none transition-colors"></textarea>
         </div>
         <div class="sm:col-span-2">
-          <label class="text-xs font-semibold text-ink/60 block mb-1">Foto de la prenda</label>
-          <input id="product-imagen-file" type="file" accept="image/*" required class="w-full border border-ink/20 rounded-lg px-3 py-2 text-sm focus:border-blush-600 transition-colors" />
+          <label class="text-xs font-semibold text-white/50 block mb-1 tracking-wide uppercase">Foto de la prenda</label>
+          <input id="product-imagen-file" type="file" accept="image/*" required class="stencil-input w-full rounded-lg px-3 py-2 text-sm transition-colors" />
         </div>
         <div>
-          <label class="text-xs font-semibold text-ink/60 block mb-1">Categoría</label>
-          <select id="product-categoria" class="w-full border border-ink/20 rounded-lg px-3 py-2 focus:border-blush-600 transition-colors">
+          <label class="text-xs font-semibold text-white/50 block mb-1 tracking-wide uppercase">Categoría</label>
+          <select id="product-categoria" class="stencil-input w-full rounded-lg px-3 py-2 transition-colors">
             <option value="COLLECTIONS">Collections</option>
             <option value="WOMEN">Women</option>
             <option value="MEN">Men</option>
@@ -418,7 +507,7 @@
           </select>
         </div>
         <div class="flex items-end">
-          <button type="submit" id="product-save-btn" class="w-full bg-ink text-white rounded-full px-6 py-2 text-sm font-semibold hover:bg-blush-600 transition-colors disabled:opacity-50">
+          <button type="submit" id="product-save-btn" class="admin-btn-spray w-full text-white rounded-full px-6 py-2 text-sm font-bold hover:opacity-95 transition-all disabled:opacity-50">
             Publicar prenda
           </button>
         </div>
@@ -426,9 +515,10 @@
     </section>
 
     <!-- Lista de prendas -->
-    <section class="bg-white border border-ink/10 rounded-2xl p-6">
-      <h2 class="font-semibold mb-4">Prendas publicadas</h2>
-      <div id="admin-product-list" class="flex flex-col divide-y divide-ink/10"></div>
+    <section class="admin-card graffiti-card rounded-2xl p-6 relative">
+      <div class="tape -top-3 right-8 w-16 rotate-[-4deg]"></div>
+      <h2 class="marker-label text-lg text-blush-300 mb-4">Prendas publicadas</h2>
+      <div id="admin-product-list" class="flex flex-col divide-y divide-white/10"></div>
     </section>
   </div>
 </div>
@@ -597,17 +687,16 @@
       topbarInput.value = state.config.top_bar_texto || "";
     }
 
-    // Logo de la barra de navegación
+    // Logo de la barra de navegación: ícono + texto siempre juntos
     const logoImg = document.getElementById("nav-logo-img");
     const logoText = document.getElementById("nav-logo-text");
     if (state.config.logo_url) {
       logoImg.src = state.config.logo_url;
       logoImg.classList.remove("hidden");
-      logoText.classList.add("hidden");
     } else {
       logoImg.classList.add("hidden");
-      logoText.classList.remove("hidden");
     }
+    logoText.classList.remove("hidden");
 
     // Imagen del escaparate (hero)
     const heroImg = document.getElementById("hero-image");
@@ -1013,7 +1102,7 @@
       .map(
         (p) => `
       <div class="flex items-center gap-4 py-3">
-        <div class="w-12 h-12 rounded-lg overflow-hidden bg-blush-50 shrink-0 border border-ink/10">
+        <div class="w-12 h-12 rounded-lg overflow-hidden bg-black/30 shrink-0 border border-blush-400/20">
           ${
             p.imagen_url
               ? `<img src="${escapeHtml(p.imagen_url)}" class="w-full h-full object-cover" alt="${escapeHtml(p.nombre)}" />`
@@ -1021,10 +1110,10 @@
           }
         </div>
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold truncate">${escapeHtml(p.nombre)}</p>
-          <p class="text-xs text-ink/50">${escapeHtml(p.categoria)} · ${fmt(p.precio)}</p>
+          <p class="text-sm font-semibold truncate text-white/90">${escapeHtml(p.nombre)}</p>
+          <p class="text-xs text-white/40">${escapeHtml(p.categoria)} · ${fmt(p.precio)}</p>
         </div>
-        <button onclick="eliminarProducto('${p.id}')" class="text-xs font-semibold text-red-500 hover:opacity-70 shrink-0">
+        <button onclick="eliminarProducto('${p.id}')" class="text-xs font-semibold text-red-400 hover:opacity-70 shrink-0">
           Eliminar
         </button>
       </div>`
