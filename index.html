@@ -6,12 +6,12 @@
 <title>HEAVEN DIVISION — Streetwear Store</title>
 <meta name="description" content="HEAVEN DIVISION — boutique de streetwear online." />
 
-<!-- ============== FUENTES ============== -->
+<!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- ============== TAILWIND (CDN) ============== -->
+<!-- Tailwind (CDN) -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -49,7 +49,7 @@
   };
 </script>
 
-<!-- ============== SUPABASE (CDN) ============== -->
+<!-- Supabase (CDN) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
@@ -141,9 +141,7 @@
     outline: 2px solid #121212; outline-offset: 2px;
   }
 
-  /* ===================================================== */
-  /* PANEL ADMIN — ESTÉTICA GRAFITERA / BÁSQUET             */
-  /* ===================================================== */
+  /* Panel admin — estética grafitera / básquet */
   .font-tag { font-family: 'Permanent Marker', cursive; }
 
   #admin-app {
@@ -235,20 +233,18 @@
 
 <body class="text-ink">
 
-<!-- ---- Notificaciones (toasts) ---- -->
+<!-- Notificaciones (toasts) -->
 <div id="toast-container" class="fixed top-5 right-5 z-[80] flex flex-col gap-3 items-end pointer-events-none"></div>
 
-<!-- ======================================================= -->
-<!-- VISTA: TIENDA (CLIENTE)                                  -->
-<!-- ======================================================= -->
+<!-- Vista: tienda (cliente) -->
 <div id="store-app">
 
-  <!-- ---- Top bar de anuncios ---- -->
+  <!-- Top bar de anuncios -->
   <div class="bg-blush-200 text-ink text-center text-xs sm:text-sm font-semibold py-2 px-4 tracking-wide">
     <span id="top-bar-text">Envíos gratis en pedidos superiores a $999 · HEAVEN DIVISION</span>
   </div>
 
-  <!-- ---- Navegación ---- -->
+  <!-- Navegación -->
   <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-ink/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-16 gap-4">
@@ -288,7 +284,7 @@
     </div>
   </header>
 
-  <!-- ---- Hero / Escaparate ---- -->
+  <!-- Hero / escaparate -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-6">
     <div class="grid md:grid-cols-2 gap-8 items-center">
       <div>
@@ -316,7 +312,7 @@
     </div>
   </section>
 
-  <!-- ---- Catálogo ---- -->
+  <!-- Catálogo -->
   <section id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
     <div class="flex items-end justify-between mb-6">
       <h2 class="font-display text-2xl sm:text-3xl">CATÁLOGO</h2>
@@ -328,11 +324,11 @@
     </div>
 
     <p id="empty-state" class="hidden text-center text-ink/50 py-16">
-      Aún no hay prendas publicadas. Vuelve pronto ✨
+      Aún no hay prendas publicadas. Vuelve pronto.
     </p>
   </section>
 
-  <!-- ---- Footer ---- -->
+  <!-- Footer -->
   <footer class="border-t border-ink/10 mt-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid sm:grid-cols-3 gap-8 text-sm">
       <div>
@@ -350,12 +346,12 @@
     </div>
   </footer>
 
-  <!-- ---- Botón flotante de carrito (móvil / respaldo) ---- -->
+  <!-- Botón flotante de carrito (móvil / respaldo) -->
   <button id="cart-fab" class="fixed bottom-5 right-5 bg-ink text-white rounded-full w-14 h-14 shadow-lg flex items-center justify-center hover:bg-blush-600 transition-colors z-30">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
   </button>
 
-  <!-- ---- Carrito lateral (drawer) ---- -->
+  <!-- Carrito lateral (drawer) -->
   <div id="cart-overlay" class="hidden fixed inset-0 bg-ink/40 z-40 opacity-0"></div>
   <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-white z-50 shadow-2xl translate-x-full flex flex-col">
     <div class="flex items-center justify-between px-5 py-4 border-b border-ink/10">
@@ -395,7 +391,7 @@
     </div>
   </aside>
 
-  <!-- ---- Lightbox: imagen ampliada con animación de brillo ---- -->
+  <!-- Lightbox: imagen ampliada con animación de brillo -->
   <div id="lightbox-overlay" class="hidden fixed inset-0 bg-ink/80 z-[70] opacity-0 flex items-center justify-center p-4 sm:p-8">
     <button id="lightbox-close" aria-label="Cerrar imagen" class="absolute top-5 right-5 text-white/80 hover:text-white transition-colors">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
@@ -409,7 +405,7 @@
     </div>
   </div>
 
-  <!-- ---- Modal: confirmación de pedido copiado para Instagram ---- -->
+  <!-- Modal: confirmación de pedido copiado para Instagram -->
   <div id="instagram-modal-overlay" class="hidden fixed inset-0 bg-ink/60 z-[75] opacity-0 flex items-center justify-center p-4">
     <div id="instagram-modal-content" class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-7 text-center scale-95">
       <div class="w-14 h-14 rounded-full bg-blush-100 text-blush-600 flex items-center justify-center mx-auto mb-4">
@@ -424,12 +420,10 @@
   </div>
 </div>
 
-<!-- ======================================================= -->
-<!-- VISTA: ADMINISTRADOR (index.html?view=admin)             -->
-<!-- ======================================================= -->
+<!-- Vista: administrador (index.html?view=admin) -->
 <div id="admin-app" class="hidden min-h-screen">
 
-  <!-- ---- Pantalla de login ---- -->
+  <!-- Pantalla de login -->
   <div id="admin-login" class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
     <div class="spray-blob float-slow" style="top:8%; left:10%; width:180px; height:180px; background:radial-gradient(circle, rgba(249,115,22,0.3), transparent 70%);"></div>
     <div class="spray-blob float-slow" style="bottom:10%; right:8%; width:220px; height:220px; background:radial-gradient(circle, rgba(201,161,119,0.28), transparent 70%); animation-delay:1.5s;"></div>
@@ -452,7 +446,7 @@
     </form>
   </div>
 
-  <!-- ---- Dashboard admin ---- -->
+  <!-- Dashboard admin -->
   <div id="admin-dashboard" class="hidden max-w-5xl mx-auto px-4 sm:px-6 py-10 relative">
     <div class="spray-blob" style="top:-40px; right:-60px; width:260px; height:260px; background:radial-gradient(circle, rgba(249,115,22,0.2), transparent 70%);"></div>
     <div class="spray-blob" style="bottom:0; left:-80px; width:220px; height:220px; background:radial-gradient(circle, rgba(201,161,119,0.18), transparent 70%);"></div>
@@ -562,30 +556,20 @@
   </div>
 </div>
 
-<!-- ======================================================= -->
-<!-- LÓGICA DE LA APLICACIÓN                                   -->
-<!-- ======================================================= -->
+<!-- Lógica de la aplicación -->
 <script type="module">
-  // ---------------------------------------------------------
-  // 1. CONFIGURACIÓN DE SUPABASE
-  //    Reemplaza los siguientes valores con los de tu proyecto
-  //    (Project Settings → API en tu panel de Supabase).
-  // ---------------------------------------------------------
+  // Configuración de Supabase — datos del proyecto (Project Settings → API)
   const SUPABASE_URL = "https://gfjhmreqdwjtwbzztada.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_TXT_2W95zsw1Ysyuo_zPJg_Fnyp_99T";
 
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // ---------------------------------------------------------
-  // 2. CONFIGURACIÓN GENERAL DEL SITIO
-  // ---------------------------------------------------------
+  // Configuración general del sitio
   const ADMIN_PASSWORD = "heaven2026"; // Cambia esta contraseña
   const WHATSAPP_NUMBER = "5523389986"; // Ajusta el prefijo de país si es necesario, ej. 52 + número
   const INSTAGRAM_PROFILE = "https://www.instagram.com/haven_dvsn/";
 
-  // ---------------------------------------------------------
-  // 3. ESTADO EN MEMORIA
-  // ---------------------------------------------------------
+  // Estado en memoria
   const state = {
     productos: [],
     config: { top_bar_texto: "Envíos gratis en pedidos superiores a $999 · HEAVEN DIVISION", logo_url: "", hero_imagen_url: "" },
@@ -596,9 +580,7 @@
 
   const fmt = (n) => `$${Number(n || 0).toFixed(2)}`;
 
-  // ---------------------------------------------------------
-  // 2.1 NOTIFICACIONES (TOAST) — reemplazan a alert()
-  // ---------------------------------------------------------
+  // Notificaciones (toast) — reemplazan a alert()
   function toast(mensaje, tipo = "success") {
     const contenedor = document.getElementById("toast-container");
 
@@ -624,9 +606,7 @@
     }, 3200);
   }
 
-  // ---------------------------------------------------------
-  // 2.2 LIGHTBOX — imagen ampliada con animación de brillo
-  // ---------------------------------------------------------
+  // Lightbox — imagen ampliada con animación de brillo
   const lightboxOverlay = document.getElementById("lightbox-overlay");
   const lightboxImg = document.getElementById("lightbox-img");
   const lightboxCaption = document.getElementById("lightbox-caption");
@@ -657,9 +637,7 @@
     if (e.key === "Escape") cerrarLightbox();
   });
 
-  // ---------------------------------------------------------
-  // 3.1 SUBIDA DE IMÁGENES DESDE LA GALERÍA (Supabase Storage)
-  // ---------------------------------------------------------
+  // Subida de imágenes desde la galería (Supabase Storage)
   const STORAGE_BUCKET = "imagenes";
 
   async function subirImagen(file, carpeta) {
@@ -680,18 +658,14 @@
     return data.publicUrl;
   }
 
-  // ---------------------------------------------------------
-  // 4. ROUTER SIMPLE POR PARÁMETRO DE URL (?view=admin)
-  // ---------------------------------------------------------
+  // Router simple por parámetro de URL (?view=admin)
   const params = new URLSearchParams(window.location.search);
   const isAdminView = params.get("view") === "admin";
 
   document.getElementById("store-app").classList.toggle("hidden", isAdminView);
   document.getElementById("admin-app").classList.toggle("hidden", !isAdminView);
 
-  // ---------------------------------------------------------
-  // 5. CARGA DE DATOS DESDE SUPABASE
-  // ---------------------------------------------------------
+  // Carga de datos desde Supabase
   async function cargarConfiguracion() {
     const { data, error } = await supabaseClient
       .from("configuracion_tienda")
@@ -716,9 +690,7 @@
     }
   }
 
-  // ---------------------------------------------------------
-  // 6. RENDERIZADO — TIENDA
-  // ---------------------------------------------------------
+  // Renderizado — tienda
   function renderConfiguracion() {
     document.getElementById("top-bar-text").textContent = state.config.top_bar_texto || "";
     const topbarInput = document.getElementById("topbar-input");
@@ -840,9 +812,7 @@
       .replaceAll('"', "&quot;");
   }
 
-  // ---------------------------------------------------------
-  // 7. NAVEGACIÓN Y BÚSQUEDA
-  // ---------------------------------------------------------
+  // Navegación y búsqueda
   document.querySelectorAll("#category-nav .nav-link").forEach((btn) => {
     btn.addEventListener("click", () => {
       state.filtroCategoria = btn.getAttribute("data-categoria") || "";
@@ -865,9 +835,7 @@
     renderProductGrid();
   });
 
-  // ---------------------------------------------------------
-  // 8. CARRITO DE COMPRAS
-  // ---------------------------------------------------------
+  // Carrito de compras
   const cartDrawer = document.getElementById("cart-drawer");
   const cartOverlay = document.getElementById("cart-overlay");
 
@@ -1022,9 +990,7 @@
     if (e.key === "Escape") cerrarModalInstagram();
   });
 
-  // ---------------------------------------------------------
-  // 9. PANEL DE ADMINISTRADOR
-  // ---------------------------------------------------------
+  // Panel de administrador
   if (isAdminView) {
     const loginScreen = document.getElementById("admin-login");
     const dashboard = document.getElementById("admin-dashboard");
@@ -1188,12 +1154,7 @@
       .join("");
   }
 
-  // ---------------------------------------------------------
-  // 10. REALTIME — SINCRONIZACIÓN INSTANTÁNEA
-  //     Cuando el admin guarda cambios, la tienda del cliente
-  //     (y cualquier otra sesión de admin abierta) se actualiza
-  //     al instante sin recargar la página.
-  // ---------------------------------------------------------
+  // Realtime — sincroniza la tienda y el panel admin al instante
   supabaseClient
     .channel("heaven-division-realtime")
     .on("postgres_changes", { event: "*", schema: "public", table: "productos" }, () => {
@@ -1204,9 +1165,7 @@
     })
     .subscribe();
 
-  // ---------------------------------------------------------
-  // 11. INICIALIZACIÓN
-  // ---------------------------------------------------------
+  // Inicialización
   document.getElementById("year").textContent = new Date().getFullYear();
   cargarConfiguracion();
   cargarProductos();
