@@ -271,6 +271,10 @@
             <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>
             <span id="cart-count" class="hidden absolute -top-2 -right-2 bg-ink text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
           </button>
+          <button id="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false" class="md:hidden hover:text-blush-600 transition-colors">
+            <svg id="mobile-menu-icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
+            <svg id="mobile-menu-icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="hidden"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
+          </button>
         </div>
       </div>
 
@@ -281,6 +285,15 @@
             class="w-full border border-ink/20 rounded-full px-4 py-2 text-sm focus:border-blush-600 transition-colors" />
         </div>
       </div>
+
+      <!-- Menú desplegable para celular -->
+      <nav id="mobile-category-nav" class="hidden md:hidden text-sm font-semibold border-t border-ink/10 pb-3">
+        <button data-categoria="" class="nav-link block w-full text-left px-1 py-3 border-b border-ink/5 hover:text-blush-600 transition-colors">NEW ARRIVALS</button>
+        <button data-categoria="COLLECTIONS" class="nav-link block w-full text-left px-1 py-3 border-b border-ink/5 hover:text-blush-600 transition-colors">COLLECTIONS</button>
+        <button data-categoria="WOMEN" class="nav-link block w-full text-left px-1 py-3 border-b border-ink/5 hover:text-blush-600 transition-colors">WOMEN</button>
+        <button data-categoria="MEN" class="nav-link block w-full text-left px-1 py-3 border-b border-ink/5 hover:text-blush-600 transition-colors">MEN</button>
+        <button data-categoria="ACCESSORIES" class="nav-link block w-full text-left px-1 py-3 hover:text-blush-600 transition-colors">ACCESSORIES</button>
+      </nav>
     </div>
   </header>
 
@@ -813,9 +826,34 @@
   }
 
   // Navegación y búsqueda
-  document.querySelectorAll("#category-nav .nav-link").forEach((btn) => {
+  const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+  const mobileMenuIconOpen = document.getElementById("mobile-menu-icon-open");
+  const mobileMenuIconClose = document.getElementById("mobile-menu-icon-close");
+  const mobileCategoryNav = document.getElementById("mobile-category-nav");
+
+  function cerrarMenuMovil() {
+    mobileCategoryNav.classList.add("hidden");
+    mobileMenuIconOpen.classList.remove("hidden");
+    mobileMenuIconClose.classList.add("hidden");
+    mobileMenuToggle.setAttribute("aria-expanded", "false");
+  }
+
+  mobileMenuToggle.addEventListener("click", () => {
+    const abierto = !mobileCategoryNav.classList.contains("hidden");
+    if (abierto) {
+      cerrarMenuMovil();
+    } else {
+      mobileCategoryNav.classList.remove("hidden");
+      mobileMenuIconOpen.classList.add("hidden");
+      mobileMenuIconClose.classList.remove("hidden");
+      mobileMenuToggle.setAttribute("aria-expanded", "true");
+    }
+  });
+
+  document.querySelectorAll(".nav-link").forEach((btn) => {
     btn.addEventListener("click", () => {
       state.filtroCategoria = btn.getAttribute("data-categoria") || "";
+      cerrarMenuMovil();
       document.getElementById("catalogo").scrollIntoView({ behavior: "smooth" });
       renderProductGrid();
     });
